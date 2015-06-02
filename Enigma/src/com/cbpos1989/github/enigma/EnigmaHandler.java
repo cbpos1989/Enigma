@@ -21,8 +21,12 @@ public class EnigmaHandler implements ActionListener{
 
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent event) {
 		// TODO Auto-generated method stub
-		
+		this.keyPressed(event.getActionCommand());
+	}
+	
+	void keyPressed(String letter){
+		System.out.print(letter + " ");
 	}
 }
