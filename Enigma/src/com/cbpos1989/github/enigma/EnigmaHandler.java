@@ -30,7 +30,10 @@ public class EnigmaHandler implements ActionListener{
 	void keyPressed(String letter){
 		Color clr = Color.RED;
 		
-		//for(JLabel lbl: eGui.lig);
+		for(int i =0; i < 26; ++i){
+			eGui.lightUpLabel(i, Color.BLACK);
+		}
+		
 		switch(letter){
 		case "Q": eGui.lightUpLabel(0, clr); break;
 		case "W": eGui.lightUpLabel(1,clr); break;
