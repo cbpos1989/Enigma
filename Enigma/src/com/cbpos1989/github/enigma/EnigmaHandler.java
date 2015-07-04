@@ -29,9 +29,10 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	void keyPressed(String letter){
-		char temp = rtr.codeLetter(letter.charAt(0));
+		char[] c = letter.toCharArray();
+		char temp = rtr.codeLetter(c[0]);
 		System.out.println(temp);
-		//lightUpLabel(temp);
+		lightUpLabel(temp);
 	}
 	
 	void lightUpLabel(char letter){
@@ -69,7 +70,6 @@ public class EnigmaHandler implements ActionListener{
 		case 'M': eGui.lightUpLabel(24,clr); break;
 		case 'L': eGui.lightUpLabel(25,clr); break;
 		}
-		System.out.print(letter + " ");
 	}
 	
 	
