@@ -14,7 +14,9 @@ import java.awt.event.ActionListener;
  */
 public class EnigmaHandler implements ActionListener{
 	private EnigmaGUI eGui;
-	Rotor rtr = new Rotor();
+	Rotor rotorI = new Rotor(2);
+	Rotor rotorII = new Rotor(3);
+	Rotor rotorIII = new Rotor(1);
 	
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
@@ -29,10 +31,15 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	void keyPressed(String letter){
-		char[] c = letter.toCharArray();
-		char temp = rtr.codeLetter(c[0]);
-		System.out.println(temp);
-		lightUpLabel(temp);
+		char[] charArray = letter.toCharArray();
+		char codingLetter = charArray[0];
+		codingLetter = rotorI.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		codingLetter = rotorII.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		codingLetter = rotorIII.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		this.lightUpLabel(codingLetter);
 	}
 	
 	void lightUpLabel(char letter){

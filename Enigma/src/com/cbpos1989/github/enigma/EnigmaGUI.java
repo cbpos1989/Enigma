@@ -27,8 +27,7 @@ public class EnigmaGUI extends JFrame {
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
 	private JLabel[] lights = new JLabel[26];
-	private char[] preCodedLetters = new char[26]; 
-	private char[] postCodedLetters = new char[26];
+	
 	private int counter = 0;
 	
 
@@ -120,7 +119,6 @@ public class EnigmaGUI extends JFrame {
 		for (int i = 0; i < keys.length; ++i) {
 			keyRow[i] = new JButton(keys[i] + "");
 			p.add(keyRow[i]);
-			preCodedLetters[i] = keys[i];
 		}
 		
 		addButtonListeners(keyRow);

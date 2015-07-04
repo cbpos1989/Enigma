@@ -8,8 +8,27 @@ package com.cbpos1989.github.enigma;
  *
  */
 public class Rotor {
-	private char[] letterArray = {'E','K','M','F','L','G','D','Q','V','Z','N','T','O','W','Y','H','X','U','S','P','A','I','B','R','C','J'};
+	private char[] letterArray = new char[26];
 
+	public Rotor(int rotorNumber){
+		switch(rotorNumber){
+		case 1: char[] rotorArrayI = {'E','K','M','F','L','G','D','Q','V','Z','N','T','O','W','Y','H','X','U','S','P','A','I','B','R','C','J'};
+				populateArray(rotorArrayI); break;
+		case 2:	char[] rotorArrayII = {'A','J','D','K','S','I','R','U','X','B','L','H','W','T','M','C','Q','G','Z','N','P','Y','F','V','O','E'};
+				populateArray(rotorArrayII); break;
+		case 3:	char[] rotorArrayIII = {'B','D','F','H','J','L','C','P','R','T','X','V','Z','N','Y','E','I','W','G','A','K','M','U','S','Q','O'};
+				populateArray(rotorArrayIII); break;
+		case 4: break;
+		case 5: break;
+		}
+	}
+	
+	void populateArray(char[] charArray){
+		for(int i = 0; i < charArray.length; ++i){
+			letterArray[i] = charArray[i];
+		}
+	}
+	
 	public char codeLetter(char c){
 		switch(c){
 			case 'A': c = letterArray[0]; break;
