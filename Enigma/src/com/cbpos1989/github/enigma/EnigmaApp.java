@@ -3,6 +3,9 @@
  */
 package com.cbpos1989.github.enigma;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -10,7 +13,9 @@ import javax.swing.JOptionPane;
  *
  */
 public class EnigmaApp {
-	
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private int screenHeight = (int)screenSize.getHeight();
+	private int screenWidth = (int)screenSize.getWidth();
 	
 	public static void main(String[] args){
 		System.out.println("Working");
@@ -20,6 +25,8 @@ public class EnigmaApp {
 	
 	void initialiseMenu(){
 		final EnigmaGUI eGui = new EnigmaGUI();
+		eGui.setBounds((screenWidth/2)-550, (screenHeight/2)-275, 550, 550);
+		
 		eGui.setVisible(true);
 		
 		eGui.addWindowListener(new java.awt.event.WindowAdapter() {

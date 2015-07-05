@@ -9,11 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SpinnerListModel;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 
 public class EnigmaGUI extends JFrame {
@@ -23,51 +27,68 @@ public class EnigmaGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = -7470739719745441939L;
 	
-
-	
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
 	private JLabel[] lights = new JLabel[26];
-	
 	private int counter = 0;
+	private int rotorValue = 0;
 	
-
 	/**
 	 * Create the frame.
 	 */
 	public EnigmaGUI() {
-		
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 535, 435);
 		initialiseGui();
-	
 	}
 	
-	
 	void initialiseGui(){
-		GridLayout mainLayout = new GridLayout(2,1,100,0);
+		EnigmaHandler eh = new EnigmaHandler(this);
+		
+		GridLayout mainLayout = new GridLayout(3,1,100,0);
 		getContentPane().setLayout(mainLayout);
+		
+		//Options Panel
+		JPanel optionsPanel = new JPanel();
+		optionsPanel.setLayout(new GridLayout(2,3,10,10));
+		getContentPane().add(optionsPanel);
+		
+		//Rotor Labels
+		JLabel leftRtrLabel = new JLabel("Left Rotor");
+		leftRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+		leftRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		optionsPanel.add(leftRtrLabel);
+		
+		JLabel middleRtrLabel = new JLabel("Middle Rotor");
+		middleRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+		middleRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		optionsPanel.add(middleRtrLabel);
+		
+		JLabel rightRtrLabel = new JLabel("Right Rotor");
+		rightRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+		rightRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		optionsPanel.add(rightRtrLabel);
+		
+		//Rotor Spinners
+		JSpinner leftRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		leftRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		optionsPanel.add(leftRtrSpinner);
+		
+		JSpinner MiddleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		MiddleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		optionsPanel.add(MiddleRtrSpinner);
+		
+		JSpinner RightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		RightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		optionsPanel.add(RightRtrSpinner);
+	
+
 		
 		//Light Panel
 		JPanel lightPanel = new JPanel();
-		lightPanel.setBorder(BorderFactory.createEmptyBorder(50,400,50,50));
 		lightPanel.setLayout(new GridLayout(3,9,5,15));
-		//lightPanel.setLayout(null);
 		lightPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		getContentPane().add(lightPanel);
-		
-//		JLabel lblQ = new JLabel("Q");
-//		lblQ.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblQ.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		lblQ.setBounds(10, 11, 25, 25);
-//		lightPanel.add(lblQ);
-//		addLightsToArray(lblQ);
-//	
-//		JLabel lblW = new JLabel("W");
-//		lblW.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblW.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//		lblW.setBounds(36, 11, 25, 25);
-//		lightPanel.add(lblW);
 		
 		createLights(firstRow, lightPanel);
 		createLights(secondRow, lightPanel);
@@ -79,6 +100,8 @@ public class EnigmaGUI extends JFrame {
 		keyboardPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		getContentPane().add(keyboardPanel);
 		
+	
+		
 		createButtons(firstRow, keyboardPanel);
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
@@ -86,15 +109,10 @@ public class EnigmaGUI extends JFrame {
 		setVisible(true);
 	}
 	
-	void sortCharArray(char[] charArray){
-		//sort(char[] charArray);
-	}
-	
 	void addLightsToArray(JLabel label){
 		lights[counter] = label;
 		counter++;
 	}
-	
 	
 	void lightUpLabel(int i, Color clr){
 		lights[i].setForeground(clr);
@@ -135,6 +153,4 @@ public class EnigmaGUI extends JFrame {
 			b.addActionListener(eh);
 		}
 	}
-	
-	
 }

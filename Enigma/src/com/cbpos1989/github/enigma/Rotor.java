@@ -13,7 +13,7 @@ public class Rotor {
 	private int rotorNotch = 0;
 	private int rotorNotchCounter = 0;
 
-	public Rotor(int rotorNumber, int rotorPosition){
+	public Rotor(int rotorPosition, int rotorNumber){
 		this.rotorPosition = rotorPosition;
 		
 		switch(rotorNumber){
@@ -52,7 +52,7 @@ public class Rotor {
 	}
 
 	void populateArray(char[] charArray){
-		for(int i = 0; i < charArray.length; ++i){
+		for (int i = 0; i < charArray.length; ++i) {
 			letterArray[i] = charArray[i];
 		}
 	}
@@ -87,23 +87,19 @@ public class Rotor {
 			case 'Z': c = letterArray[25]; break;
 		}
 		
-	
 		return c;
 	}
-	
 	
 	void shiftLetterArray(){
 		char firstLetter = letterArray[0];
 		
-		
-		for(int i = 1 ;i < letterArray.length; ++i){
+		for (int i = 1 ;i < letterArray.length; ++i) {
 			 letterArray[i - 1] = letterArray[i];
 		}
 		
 		letterArray[letterArray.length-1] = firstLetter;
 		this.rotorNotchCounter++;
 	}
-
 }
 
 

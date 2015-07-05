@@ -14,37 +14,44 @@ import java.awt.event.ActionListener;
  */
 public class EnigmaHandler implements ActionListener{
 	private EnigmaGUI eGui;
-	Rotor rotorRight = new Rotor(5,1);
-	Rotor rotorMiddle = new Rotor(4,2);
-	Rotor rotorLeft = new Rotor(1,3);
+	private Rotor rotorLeft = new Rotor(1,1);
+	private Rotor rotorMiddle = new Rotor(2,2);
+	private Rotor rotorRight = new Rotor(3,3);
 	
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
-		
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
 		this.keyPressed(event.getActionCommand());
 	}
 	
 	void keyPressed(String letter){
-		char[] charArray = letter.toCharArray();
-		char codingLetter = charArray[0];
+		char codingLetter = letter.charAt(0);
+		
+		//First Pass through the rotor's
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
 		codingLetter = rotorMiddle.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
 		codingLetter = rotorLeft.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
+		//Second pass back through the rotor's in opposite direction
 		codingLetter = rotorLeft.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
 		codingLetter = rotorMiddle.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
 		this.lightUpLabel(codingLetter);
+		
 		checkRotorPosition(rotorRight);
 		checkRotorPosition(rotorMiddle);
 		checkRotorPosition(rotorLeft);
