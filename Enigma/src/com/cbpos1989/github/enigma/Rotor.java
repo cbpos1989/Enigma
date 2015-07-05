@@ -9,20 +9,48 @@ package com.cbpos1989.github.enigma;
  */
 public class Rotor {
 	private char[] letterArray = new char[26];
+	private int rotorPosition = 0;
+	private int rotorNotch = 0;
+	private int rotorNotchCounter = 0;
 
-	public Rotor(int rotorNumber){
+	public Rotor(int rotorNumber, int rotorPosition){
+		this.rotorPosition = rotorPosition;
+		
 		switch(rotorNumber){
 		case 1: char[] rotorArrayI = {'E','K','M','F','L','G','D','Q','V','Z','N','T','O','W','Y','H','X','U','S','P','A','I','B','R','C','J'};
-				populateArray(rotorArrayI); break;
+				populateArray(rotorArrayI);
+				setRotorNotch(7); break;
 		case 2:	char[] rotorArrayII = {'A','J','D','K','S','I','R','U','X','B','L','H','W','T','M','C','Q','G','Z','N','P','Y','F','V','O','E'};
-				populateArray(rotorArrayII); break;
+				populateArray(rotorArrayII);
+				setRotorNotch(25); break;
 		case 3:	char[] rotorArrayIII = {'B','D','F','H','J','L','C','P','R','T','X','V','Z','N','Y','E','I','W','G','A','K','M','U','S','Q','O'};
-				populateArray(rotorArrayIII); break;
-		case 4: break;
-		case 5: break;
+				populateArray(rotorArrayIII);
+				setRotorNotch(11); break;
+		case 4: char[] rotorArrayIV = {'E','S','O','V','P','Z','J','A','Y','Q','U','I','R','H','X','L','N','F','T','G','K','D','C','M','W','B'};
+				populateArray(rotorArrayIV);
+				setRotorNotch(6); break;
+		case 5: char[] rotorArrayV = {'V','Z','B','R','G','I','T','Y','U','P','S','D','N','H','L','X','A','W','M','J','Q','O','F','E','C','K'};
+				populateArray(rotorArrayV);
+				setRotorNotch(1); break;
 		}
 	}
 	
+	public int getRotorNotch() {
+		return this.rotorNotch;
+	}
+	
+	public void setRotorNotch(int rtrNotch){
+		this.rotorNotch = rtrNotch;
+	}
+
+	public int getRotorPosition() {
+		return this.rotorPosition;
+	}
+	
+	public int getRotorNotchCounter(){
+		return this.rotorNotchCounter;
+	}
+
 	void populateArray(char[] charArray){
 		for(int i = 0; i < charArray.length; ++i){
 			letterArray[i] = charArray[i];
@@ -59,11 +87,10 @@ public class Rotor {
 			case 'Z': c = letterArray[25]; break;
 		}
 		
-		shiftLetterArray();
+	
 		return c;
-		
-		
 	}
+	
 	
 	void shiftLetterArray(){
 		char firstLetter = letterArray[0];
@@ -74,6 +101,7 @@ public class Rotor {
 		}
 		
 		letterArray[letterArray.length-1] = firstLetter;
+		this.rotorNotchCounter++;
 	}
 
 }

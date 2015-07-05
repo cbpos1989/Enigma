@@ -7,10 +7,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 
 
@@ -133,4 +135,6 @@ public class EnigmaGUI extends JFrame {
 			b.addActionListener(eh);
 		}
 	}
+	
+	
 }
