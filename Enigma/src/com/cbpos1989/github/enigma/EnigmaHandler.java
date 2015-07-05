@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
  */
 public class EnigmaHandler implements ActionListener{
 	private EnigmaGUI eGui;
-	Rotor rotorRight = new Rotor(2,1);
-	Rotor rotorMiddle = new Rotor(3,2);
+	Rotor rotorRight = new Rotor(5,1);
+	Rotor rotorMiddle = new Rotor(4,2);
 	Rotor rotorLeft = new Rotor(1,3);
 	
 	public EnigmaHandler(EnigmaGUI eGui){
@@ -35,15 +35,19 @@ public class EnigmaHandler implements ActionListener{
 		char codingLetter = charArray[0];
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
-		
-		
-	
-		
-//		codingLetter = rotorII.codeLetter(codingLetter);
-//		System.out.print(codingLetter + " ");
-//		codingLetter = rotorIII.codeLetter(codingLetter);
-//		System.out.print(codingLetter + " ");
-//		this.lightUpLabel(codingLetter);
+		codingLetter = rotorMiddle.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		codingLetter = rotorLeft.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		codingLetter = rotorLeft.codeLetter(codingLetter);
+		codingLetter = rotorMiddle.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		codingLetter = rotorRight.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		this.lightUpLabel(codingLetter);
+		checkRotorPosition(rotorRight);
+		checkRotorPosition(rotorMiddle);
+		checkRotorPosition(rotorLeft);
 	}
 	
 	void lightUpLabel(char letter){
@@ -84,7 +88,7 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	//Carries out the function of shifting the letters on the rotor's depend on position and if a notch was hit.
-	void checkRotorPosition(Rotor rotor, char codingLetter){
+	void checkRotorPosition(Rotor rotor){
 		switch(rotor.getRotorPosition()){
 		case 1: rotor.shiftLetterArray(); break;
 		case 2: if(rotorRight.getRotorNotchCounter() == rotorRight.getRotorNotch()){
