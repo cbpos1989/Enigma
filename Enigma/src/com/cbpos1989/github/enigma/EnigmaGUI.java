@@ -2,9 +2,11 @@ package com.cbpos1989.github.enigma;
 
 
 import java.awt.GridLayout;
+import java.text.ParseException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,8 +18,12 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class EnigmaGUI extends JFrame {
@@ -50,7 +56,8 @@ public class EnigmaGUI extends JFrame {
 		
 		//Options Panel
 		JPanel optionsPanel = new JPanel();
-		optionsPanel.setLayout(new GridLayout(2,3,10,10));
+		optionsPanel.setLayout(new GridLayout(3,3,10,10));
+		optionsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		getContentPane().add(optionsPanel);
 		
 		//Rotor Labels
@@ -74,15 +81,34 @@ public class EnigmaGUI extends JFrame {
 		leftRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(leftRtrSpinner);
 		
-		JSpinner MiddleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
-		MiddleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
-		optionsPanel.add(MiddleRtrSpinner);
+		JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		optionsPanel.add(middleRtrSpinner);
 		
-		JSpinner RightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
-		RightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
-		optionsPanel.add(RightRtrSpinner);
-	
-
+		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		rightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		optionsPanel.add(rightRtrSpinner);
+		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.LIGHT_GRAY);
+		optionsPanel.add(separator);
+		
+		JButton btnCommitRotors = new JButton("Commit Rotors");
+		btnCommitRotors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(getSpinnerValue(rightRtrSpinner).toString() == "II"){
+					System.out.print("It Works");
+				}
+			
+			}
+		});
+		optionsPanel.add(btnCommitRotors);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.LIGHT_GRAY);
+		optionsPanel.add(separator_1);
+		
+		//getSpinnerValue(rightRtrSpinner);
 		
 		//Light Panel
 		JPanel lightPanel = new JPanel();
@@ -100,13 +126,30 @@ public class EnigmaGUI extends JFrame {
 		keyboardPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		getContentPane().add(keyboardPanel);
 		
-	
-		
 		createButtons(firstRow, keyboardPanel);
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
 		
 		setVisible(true);
+	}
+	
+	Object getSpinnerValue(JSpinner spinner){
+		try {
+			spinner.commitEdit();
+		} catch (ParseException pe) {
+			  // Edited value is invalid, spinner.getValue() will return
+		      // the last valid value, you could revert the spinner to show that:
+		      JComponent editor = spinner.getEditor();
+		      if (editor instanceof DefaultEditor) {
+		          ((DefaultEditor)editor).getTextField().setValue(spinner.getValue());
+		      }
+		      // reset the value to some known value:
+		      spinner.setValue(spinner.getPreviousValue());
+		      // or treat the last valid value as the current, in which
+		      // case you don't need to do anything.
+		}
+		
+		return spinner.getValue();
 	}
 	
 	void addLightsToArray(JLabel label){
