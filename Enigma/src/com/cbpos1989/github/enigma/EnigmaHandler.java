@@ -1,8 +1,11 @@
 package com.cbpos1989.github.enigma;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -17,14 +20,24 @@ public class EnigmaHandler implements ActionListener{
 	private Rotor rotorRight;
 	private Rotor rotorMiddle; 
 	private Rotor rotorLeft;
+	private boolean hasRotors;
 	
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
+		this.hasRotors = false;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		this.keyPressed(event.getActionCommand());
+		if(hasRotors){
+			this.keyPressed(event.getActionCommand());
+		} else {
+			Component rotorMessage = null;
+			JOptionPane.showMessageDialog(rotorMessage,
+				    "Commit choosen rotors before coding message",
+				    "Rotor Warning",
+				    JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 	void keyPressed(String letter){
@@ -64,6 +77,7 @@ public class EnigmaHandler implements ActionListener{
 		rotorRight = new Rotor(1,rightRtr);
 		rotorMiddle = new Rotor(2,middleRtr);
 		rotorLeft = new Rotor(3,leftRtr);
+		hasRotors = true;
 	}
 	
 	void lightUpLabel(char letter){

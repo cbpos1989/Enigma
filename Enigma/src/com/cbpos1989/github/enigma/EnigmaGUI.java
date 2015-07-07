@@ -74,10 +74,16 @@ public class EnigmaGUI extends JFrame {
 		rightRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		optionsPanel.add(rightRtrLabel);
 		
+	
+		
+		
 		//Rotor Spinners
 		final JSpinner leftRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		leftRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(leftRtrSpinner);
+		
+		
+	
 		
 		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
