@@ -113,7 +113,7 @@ public class EnigmaGUI extends JFrame {
 		//Light Panel
 		JPanel lightPanel = new JPanel();
 		lightPanel.setLayout(new GridLayout(3,9,5,15));
-		lightPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		lightPanel.setBorder(BorderFactory.createEmptyBorder(10, 45, 10, 0));
 		getContentPane().add(lightPanel);
 		
 		createLights(firstRow, lightPanel);
@@ -167,6 +167,7 @@ public class EnigmaGUI extends JFrame {
 		
 		for (int i = 0; i < chars.length; ++i) {
 			lightRow[i] = new JLabel(chars[i] + "");
+			lightRow[i].setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 16));
 			p.add(lightRow[i]);
 			addLightsToArray(lightRow[i]);
 		}
@@ -181,6 +182,7 @@ public class EnigmaGUI extends JFrame {
 		
 		for (int i = 0; i < keys.length; ++i) {
 			keyRow[i] = new JButton(keys[i] + "");
+			keyRow[i].setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 16));
 			p.add(keyRow[i]);
 		}
 		
