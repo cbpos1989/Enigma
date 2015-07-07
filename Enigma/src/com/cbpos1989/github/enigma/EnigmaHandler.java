@@ -14,9 +14,9 @@ import java.awt.event.ActionListener;
  */
 public class EnigmaHandler implements ActionListener{
 	private EnigmaGUI eGui;
-	private Rotor rotorRight = new Rotor(1,1);
-	private Rotor rotorMiddle = new Rotor(2,2);
-	private Rotor rotorLeft = new Rotor(3,3);
+	private Rotor rotorRight;
+	private Rotor rotorMiddle; 
+	private Rotor rotorLeft;
 	
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
@@ -52,12 +52,18 @@ public class EnigmaHandler implements ActionListener{
 		System.out.print(codingLetter + " ");
 		
 	
-		
+		System.out.print("//End Coding// ");
 		this.lightUpLabel(codingLetter);
 		
 		checkRotorPosition(rotorRight);
 		checkRotorPosition(rotorMiddle);
 		checkRotorPosition(rotorLeft);
+	}
+	
+	public void createRotors(int rightRtr, int middleRtr, int leftRtr){
+		rotorRight = new Rotor(1,rightRtr);
+		rotorMiddle = new Rotor(2,middleRtr);
+		rotorLeft = new Rotor(3,leftRtr);
 	}
 	
 	void lightUpLabel(char letter){
