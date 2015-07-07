@@ -37,6 +37,20 @@ public class Rotor {
 				populateArray(rotorArrayV);
 				setRotorNotch(66); break;
 		}
+		
+		char rotorNotchCounterChar = eGui.getRotorText(eGui.getTextField(rotorPosition));
+		this.setRotorNotchCounter((int) rotorNotchCounterChar);
+		
+		for(int i = 65; i < rotorNotchCounter; ++i){
+			char firstLetter = letterArray[0];
+			
+			for (int j = 1 ;j < letterArray.length; ++j) {
+				 letterArray[j - 1] = letterArray[j];
+			}
+			
+			letterArray[letterArray.length-1] = firstLetter;
+		}
+		
 	}
 	
 	public int getRotorNotch() {
@@ -51,8 +65,16 @@ public class Rotor {
 		return this.rotorPosition;
 	}
 	
+	public void setRotorPosition(int rotorPosition) {
+		this.rotorPosition = rotorPosition;
+	}
+	
 	public int getRotorNotchCounter(){
 		return this.rotorNotchCounter;
+	}
+	
+	public void setRotorNotchCounter(int rotorNotchCounter){
+		this.rotorNotchCounter = rotorNotchCounter;
 	}
 
 	void populateArray(char[] charArray){

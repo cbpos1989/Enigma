@@ -203,8 +203,9 @@ public class EnigmaGUI extends JFrame {
 		}
 	}
 	
-	public String getRotorText(JTextField textField){
-		return textField.getText();
+	public char getRotorText(JTextField textField){
+		String textFieldStr = textField.getText();
+		return textFieldStr.charAt(0);
 	}
 	
 	public void setRotorText(JTextField textField, String text){
