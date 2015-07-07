@@ -21,6 +21,11 @@ import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.Insets;
 
 
 public class EnigmaGUI extends JFrame {
@@ -36,6 +41,9 @@ public class EnigmaGUI extends JFrame {
 	private JLabel[] lights = new JLabel[26];
 	private int counter = 0;
 	final private EnigmaHandler eh;
+	private JTextField leftRtrTextField;
+	private JTextField middleRtrTextField;
+	private JTextField rightRtrTextField;
 	
 	/**
 	 * Create the frame.
@@ -49,55 +57,87 @@ public class EnigmaGUI extends JFrame {
 	void initialiseGui(){
 		
 		
-		GridLayout mainLayout = new GridLayout(3,1,100,0);
+		GridLayout mainLayout = new GridLayout(4,1,100,0);
 		getContentPane().setLayout(mainLayout);
 		
-		//Options Panel
-		JPanel optionsPanel = new JPanel();
-		optionsPanel.setLayout(new GridLayout(3,3,10,10));
-		optionsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		getContentPane().add(optionsPanel);
+		//Headings Panel
+		JPanel headingsPanel = new JPanel();
+		headingsPanel.setLayout(new GridLayout(2,3,10,10));
+		headingsPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		getContentPane().add(headingsPanel);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		headingsPanel.add(horizontalStrut);
+		
+		JLabel titleLabel = new JLabel("Enigma Machine");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
+		headingsPanel.add(titleLabel);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		headingsPanel.add(horizontalStrut_1);
 		
 		//Rotor Labels
 		JLabel leftRtrLabel = new JLabel("Left Rotor");
 		leftRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		leftRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		optionsPanel.add(leftRtrLabel);
+		headingsPanel.add(leftRtrLabel);
 		
 		JLabel middleRtrLabel = new JLabel("Middle Rotor");
 		middleRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		middleRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		optionsPanel.add(middleRtrLabel);
+		headingsPanel.add(middleRtrLabel);
 		
 		JLabel rightRtrLabel = new JLabel("Right Rotor");
 		rightRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		rightRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		optionsPanel.add(rightRtrLabel);
+		headingsPanel.add(rightRtrLabel);
 		
 	
-		
+		//Options Panel
+		JPanel optionsPanel = new JPanel();
+		optionsPanel.setLayout(new GridLayout(2,6,10,10));
+		optionsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		getContentPane().add(optionsPanel);
 		
 		//Rotor Spinners
 		final JSpinner leftRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		leftRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(leftRtrSpinner);
 		
-		
-	
+		leftRtrTextField = new JTextField();
+		leftRtrTextField.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		leftRtrTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		leftRtrTextField.setPreferredSize(new Dimension(4, 20));
+		optionsPanel.add(leftRtrTextField);
+		leftRtrTextField.setColumns(10);
 		
 		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(middleRtrSpinner);
 		
+		middleRtrTextField = new JTextField();
+		middleRtrTextField.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		middleRtrTextField.setPreferredSize(new Dimension(4, 20));
+		optionsPanel.add(middleRtrTextField);
+		middleRtrTextField.setColumns(10);
+		
 		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		rightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(rightRtrSpinner);
 		
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.LIGHT_GRAY);
-		optionsPanel.add(separator);
+		rightRtrTextField = new JTextField();
+		rightRtrTextField.setFont(new Font("Cooper Black", Font.BOLD, 16));
+		rightRtrTextField.setMinimumSize(new Dimension(4, 20));
+		optionsPanel.add(rightRtrTextField);
+		rightRtrTextField.setColumns(10);
 		
 		JButton btnCommitRotors = new JButton("Commit Rotors");
+		btnCommitRotors.setMargin(new Insets(2, 2, 2, 2));
+		btnCommitRotors.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnCommitRotors.setPreferredSize(new Dimension(206, 23));
+		btnCommitRotors.setMaximumSize(new Dimension(206, 23));
+		btnCommitRotors.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
 		btnCommitRotors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rightRtr = convertSpinnerValue(rightRtrSpinner);
@@ -107,11 +147,19 @@ public class EnigmaGUI extends JFrame {
 				eh.createRotors(rightRtr, middleRtr, leftRtr);
 			}
 		});
+		
+		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
+		optionsPanel.add(horizontalStrut_4);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
+		optionsPanel.add(horizontalStrut_3);
 		optionsPanel.add(btnCommitRotors);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.LIGHT_GRAY);
-		optionsPanel.add(separator_1);
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		optionsPanel.add(horizontalStrut_2);
+		
+		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
+		optionsPanel.add(horizontalStrut_6);
 		
 		//getSpinnerValue(rightRtrSpinner);
 		
