@@ -111,26 +111,31 @@ public class EnigmaGUI extends JFrame {
 		leftRtrTextField.setPreferredSize(new Dimension(4, 20));
 		optionsPanel.add(leftRtrTextField);
 		leftRtrTextField.setColumns(10);
+		leftRtrTextField.setText("1");
 		
 		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(middleRtrSpinner);
 		
 		middleRtrTextField = new JTextField();
+		middleRtrTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		middleRtrTextField.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		middleRtrTextField.setPreferredSize(new Dimension(4, 20));
 		optionsPanel.add(middleRtrTextField);
 		middleRtrTextField.setColumns(10);
+		middleRtrTextField.setText("1");
 		
 		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		rightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(rightRtrSpinner);
 		
 		rightRtrTextField = new JTextField();
+		rightRtrTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		rightRtrTextField.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		rightRtrTextField.setMinimumSize(new Dimension(4, 20));
 		optionsPanel.add(rightRtrTextField);
 		rightRtrTextField.setColumns(10);
+		rightRtrTextField.setText("1");
 		
 		JButton btnCommitRotors = new JButton("Commit Rotors");
 		btnCommitRotors.setMargin(new Insets(2, 2, 2, 2));
@@ -183,7 +188,27 @@ public class EnigmaGUI extends JFrame {
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
 		
+		
+		
 		setVisible(true);
+	}
+	
+	public JTextField getTextField(int index){
+		if(index == 1) {
+			return this.rightRtrTextField;
+		} else if (index == 2) {
+			return this.middleRtrTextField;
+		} else {
+			return this.leftRtrTextField;
+		}
+	}
+	
+	public String getRotorText(JTextField textField){
+		return textField.getText();
+	}
+	
+	public void setRotorText(JTextField textField, String text){
+		textField.setText(text);
 	}
 	
 	Object getSpinnerValue(JSpinner spinner){
@@ -257,8 +282,6 @@ public class EnigmaGUI extends JFrame {
 	}
 	
 	void addButtonListeners(JButton[] buttons){
-		//eh = new EnigmaHandler(this);
-		
 		for (JButton b: buttons) {
 			b.addActionListener(eh);
 		}

@@ -25,6 +25,7 @@ public class EnigmaHandler implements ActionListener{
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
 		this.hasRotors = false;
+		
 	}
 
 	@Override
@@ -74,9 +75,9 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	public void createRotors(int rightRtr, int middleRtr, int leftRtr){
-		rotorRight = new Rotor(1,rightRtr);
-		rotorMiddle = new Rotor(2,middleRtr);
-		rotorLeft = new Rotor(3,leftRtr);
+		rotorRight = new Rotor(1,rightRtr, eGui);
+		rotorMiddle = new Rotor(2,middleRtr, eGui);
+		rotorLeft = new Rotor(3,leftRtr, eGui);
 		hasRotors = true;
 	}
 	

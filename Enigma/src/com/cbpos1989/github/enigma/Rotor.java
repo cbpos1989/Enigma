@@ -3,35 +3,39 @@
  */
 package com.cbpos1989.github.enigma;
 
+import javax.swing.JTextField;
+
 /**
  * @author Colm O'Sullivan
  *
  */
 public class Rotor {
+	private EnigmaGUI eGui;
 	private char[] letterArray = new char[26];
 	private int rotorPosition = 0;
 	private int rotorNotch = 0;
-	private int rotorNotchCounter = 0;
+	private int rotorNotchCounter = 1;
 
-	public Rotor(int rotorPosition, int rotorNumber){
+	public Rotor(int rotorPosition, int rotorNumber, EnigmaGUI eGui){
 		this.rotorPosition = rotorPosition;
+		this.eGui = eGui;
 		
 		switch(rotorNumber){
 		case 1: char[] rotorArrayI = {'E','K','M','F','L','G','D','Q','V','Z','N','T','O','W','Y','H','X','U','S','P','A','I','B','R','C','J'};
 				populateArray(rotorArrayI);
-				setRotorNotch(7); break;
+				setRotorNotch(8); break;
 		case 2:	char[] rotorArrayII = {'A','J','D','K','S','I','R','U','X','B','L','H','W','T','M','C','Q','G','Z','N','P','Y','F','V','O','E'};
 				populateArray(rotorArrayII);
-				setRotorNotch(25); break;
+				setRotorNotch(26); break;
 		case 3:	char[] rotorArrayIII = {'B','D','F','H','J','L','C','P','R','T','X','V','Z','N','Y','E','I','W','G','A','K','M','U','S','Q','O'};
 				populateArray(rotorArrayIII);
-				setRotorNotch(11); break;
+				setRotorNotch(12); break;
 		case 4: char[] rotorArrayIV = {'E','S','O','V','P','Z','J','A','Y','Q','U','I','R','H','X','L','N','F','T','G','K','D','C','M','W','B'};
 				populateArray(rotorArrayIV);
-				setRotorNotch(6); break;
+				setRotorNotch(7); break;
 		case 5: char[] rotorArrayV = {'V','Z','B','R','G','I','T','Y','U','P','S','D','N','H','L','X','A','W','M','J','Q','O','F','E','C','K'};
 				populateArray(rotorArrayV);
-				setRotorNotch(1); break;
+				setRotorNotch(2); break;
 		}
 	}
 	
@@ -98,7 +102,15 @@ public class Rotor {
 		}
 		
 		letterArray[letterArray.length-1] = firstLetter;
-		this.rotorNotchCounter++;
+		
+		if(rotorNotchCounter < 26){
+			this.rotorNotchCounter++;
+		} else {
+			this.rotorNotchCounter = 1;
+		}
+		
+		JTextField textField = this.eGui.getTextField(rotorPosition);
+		this.eGui.setRotorText(textField, (rotorNotchCounter) + "");
 	}
 }
 
