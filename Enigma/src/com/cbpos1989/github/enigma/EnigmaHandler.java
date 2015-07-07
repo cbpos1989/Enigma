@@ -45,6 +45,7 @@ public class EnigmaHandler implements ActionListener{
 		char codingLetter = letter.charAt(0);
 		
 		//First Pass through the rotor's
+		System.out.print("//1st Pass//");
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
 		
@@ -56,6 +57,7 @@ public class EnigmaHandler implements ActionListener{
 		
 		
 		//Second pass back through the rotor's in opposite direction
+		System.out.print("//2nd Pass//");
 		codingLetter = rotorLeft.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
 		
@@ -66,7 +68,7 @@ public class EnigmaHandler implements ActionListener{
 		System.out.print(codingLetter + " ");
 		
 	
-		System.out.print("//End Coding// ");
+		System.out.print("//End//\n");
 		this.lightUpLabel(codingLetter);
 		
 		checkRotorPosition(rotorRight);

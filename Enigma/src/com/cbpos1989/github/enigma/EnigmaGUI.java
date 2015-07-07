@@ -111,7 +111,7 @@ public class EnigmaGUI extends JFrame {
 		leftRtrTextField.setPreferredSize(new Dimension(4, 20));
 		optionsPanel.add(leftRtrTextField);
 		leftRtrTextField.setColumns(10);
-		leftRtrTextField.setText("1");
+		leftRtrTextField.setText("A");
 		
 		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
@@ -123,7 +123,7 @@ public class EnigmaGUI extends JFrame {
 		middleRtrTextField.setPreferredSize(new Dimension(4, 20));
 		optionsPanel.add(middleRtrTextField);
 		middleRtrTextField.setColumns(10);
-		middleRtrTextField.setText("1");
+		middleRtrTextField.setText("A");
 		
 		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		rightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
@@ -135,9 +135,9 @@ public class EnigmaGUI extends JFrame {
 		rightRtrTextField.setMinimumSize(new Dimension(4, 20));
 		optionsPanel.add(rightRtrTextField);
 		rightRtrTextField.setColumns(10);
-		rightRtrTextField.setText("1");
+		rightRtrTextField.setText("A");
 		
-		JButton btnCommitRotors = new JButton("Commit Rotors");
+		JButton btnCommitRotors = new JButton("Set Rotors");
 		btnCommitRotors.setMargin(new Insets(2, 2, 2, 2));
 		btnCommitRotors.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnCommitRotors.setPreferredSize(new Dimension(206, 23));
@@ -208,7 +208,9 @@ public class EnigmaGUI extends JFrame {
 	}
 	
 	public void setRotorText(JTextField textField, String text){
-		textField.setText(text);
+		int rotorNumber = Integer.parseInt(text);
+		char rotorChar = (char) rotorNumber;
+		textField.setText(rotorChar + "");
 	}
 	
 	Object getSpinnerValue(JSpinner spinner){
