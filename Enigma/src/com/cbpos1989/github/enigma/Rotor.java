@@ -3,6 +3,9 @@
  */
 package com.cbpos1989.github.enigma;
 
+import java.awt.Component;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -39,7 +42,16 @@ public class Rotor {
 		}
 		
 		char rotorNotchCounterChar = eGui.getRotorText(eGui.getTextField(rotorPosition));
-		this.setRotorNotchCounter((int) rotorNotchCounterChar);
+		
+		if(rotorNotchCounterChar > 64 && rotorNotchCounterChar < 91){
+			this.setRotorNotchCounter((int) rotorNotchCounterChar);
+		} else {
+			Component rotorMessage = null;
+			JOptionPane.showMessageDialog(rotorMessage,
+				    "Rotor position must be set between A-Z",
+				    "Rotor Warning",
+				    JOptionPane.WARNING_MESSAGE);
+		}
 		
 		for(int i = 65; i < rotorNotchCounter; ++i){
 			char firstLetter = letterArray[0];
@@ -132,7 +144,7 @@ public class Rotor {
 		}
 		
 		JTextField textField = this.eGui.getTextField(rotorPosition);
-		this.eGui.setRotorText(textField, (rotorNotchCounter) + "");
+		this.eGui.setRotorText(textField,rotorNotchCounter);
 	}
 }
 

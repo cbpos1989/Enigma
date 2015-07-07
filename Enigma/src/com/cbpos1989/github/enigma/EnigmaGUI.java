@@ -188,8 +188,6 @@ public class EnigmaGUI extends JFrame {
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
 		
-		
-		
 		setVisible(true);
 	}
 	
@@ -205,12 +203,13 @@ public class EnigmaGUI extends JFrame {
 	
 	public char getRotorText(JTextField textField){
 		String textFieldStr = textField.getText();
+		textFieldStr = textFieldStr.toUpperCase();
 		return textFieldStr.charAt(0);
 	}
 	
-	public void setRotorText(JTextField textField, String text){
-		int rotorNumber = Integer.parseInt(text);
-		char rotorChar = (char) rotorNumber;
+	public void setRotorText(JTextField textField, int rotorValue){
+		
+		char rotorChar = (char) rotorValue;
 		textField.setText(rotorChar + "");
 	}
 	
