@@ -122,10 +122,11 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	void lightUpLabel(char letter){
-	Color clr = Color.RED;
+	Color clr = Color.YELLOW;
 		
+		//Reset Lights before lighting up a new letter
 		for(int i =0; i < 26; ++i){
-			eGui.lightUpLabel(i, Color.BLACK);
+			eGui.lightUpLabel(i, Color.WHITE);
 		}
 		
 		switch(letter){

@@ -3,6 +3,7 @@
  */
 package com.cbpos1989.github.enigma;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -29,7 +30,6 @@ public class EnigmaApp {
 	void initialiseMenu(){
 		final EnigmaGUI eGui = new EnigmaGUI();
 		eGui.setBounds((screenWidth/2)-275, (screenHeight/2)-300, 550, 575);
-		
 		eGui.setVisible(true);
 		
 		eGui.addWindowListener(new java.awt.event.WindowAdapter() {

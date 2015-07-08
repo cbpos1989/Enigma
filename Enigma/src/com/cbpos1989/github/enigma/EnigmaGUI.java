@@ -17,6 +17,8 @@ import javax.swing.SpinnerListModel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
@@ -24,13 +26,13 @@ import javax.swing.JSpinner.DefaultEditor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
+import java.awt.Container;
+
 import javax.swing.Box;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.Insets;
 import javax.swing.JRadioButton;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
@@ -64,24 +66,35 @@ public class EnigmaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public EnigmaGUI() {
+		setBackground(Color.DARK_GRAY);
 		eh = new EnigmaHandler(this);
 		initialiseGui();
 	}
 	
 	void initialiseGui(){
-		GridLayout mainLayout = new GridLayout(4,1,100,0);
+		GridLayout mainLayout = new GridLayout(2,1,0,0);
+		
 		getContentPane().setLayout(mainLayout);
+		
+		//Top Panel
+		JPanel topPanel = new JPanel();
+		topPanel.setBackground(Color.DARK_GRAY);
+		topPanel.setLayout(new GridLayout(3,1,25,30));
+		topPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		getContentPane().add(topPanel);
 		
 		//Headings Panel
 		JPanel headingsPanel = new JPanel();
+		headingsPanel.setBackground(Color.DARK_GRAY);
 		headingsPanel.setLayout(new GridLayout(2,3,10,10));
 		headingsPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-		getContentPane().add(headingsPanel);
+		topPanel.add(headingsPanel);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		headingsPanel.add(horizontalStrut);
 		
 		JLabel titleLabel = new JLabel("Enigma Machine");
+		titleLabel.setForeground(Color.LIGHT_GRAY);
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
 		headingsPanel.add(titleLabel);
@@ -91,26 +104,30 @@ public class EnigmaGUI extends JFrame {
 		
 		//Rotor Labels
 		JLabel leftRtrLabel = new JLabel("Left Rotor");
+		leftRtrLabel.setForeground(Color.LIGHT_GRAY);
 		leftRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		leftRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headingsPanel.add(leftRtrLabel);
 		
 		JLabel middleRtrLabel = new JLabel("Middle Rotor");
+		middleRtrLabel.setForeground(Color.LIGHT_GRAY);
 		middleRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		middleRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headingsPanel.add(middleRtrLabel);
 		
 		JLabel rightRtrLabel = new JLabel("Right Rotor");
+		rightRtrLabel.setForeground(Color.LIGHT_GRAY);
 		rightRtrLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		rightRtrLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		headingsPanel.add(rightRtrLabel);
 		
 	
-		//Options Panel
+		//Rotor Options Panel
 		JPanel optionsPanel = new JPanel();
-		optionsPanel.setLayout(new GridLayout(2,6,10,10));
+		optionsPanel.setBackground(Color.DARK_GRAY);
+		optionsPanel.setLayout(new GridLayout(1,6,10,10));
 		optionsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		getContentPane().add(optionsPanel);
+		topPanel.add(optionsPanel);
 		
 		//Rotor Spinners
 		final JSpinner leftRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
@@ -149,6 +166,15 @@ public class EnigmaGUI extends JFrame {
 		rightRtrTextField.setColumns(10);
 		rightRtrTextField.setText("A");
 		
+		
+		//Options Commands Panel
+		JPanel commandsPanel = new JPanel();
+		commandsPanel.setBackground(Color.DARK_GRAY);
+		commandsPanel.setLayout(new GridLayout(1,2,10,10));
+		commandsPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		topPanel.add(commandsPanel);
+		
+		
 		JButton btnCommitRotors = new JButton("Set Rotors");
 		btnCommitRotors.setMargin(new Insets(2, 2, 2, 2));
 		btnCommitRotors.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -165,14 +191,15 @@ public class EnigmaGUI extends JFrame {
 			}
 		});
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
-		optionsPanel.add(horizontalStrut_4);
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		commandsPanel.add(horizontalStrut_2);
 		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		optionsPanel.add(horizontalStrut_3);
-		optionsPanel.add(btnCommitRotors);
+		commandsPanel.add(btnCommitRotors);
 		
 		JRadioButton decodeRadioButton = new JRadioButton("Decode Message");
+		decodeRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
+		decodeRadioButton.setForeground(Color.LIGHT_GRAY);
+		decodeRadioButton.setBackground(Color.DARK_GRAY);
 		decodeRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if(!isDecoding){
@@ -183,21 +210,24 @@ public class EnigmaGUI extends JFrame {
 			}
 		});
 		decodeRadioButton.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
-		optionsPanel.add(decodeRadioButton);
+		commandsPanel.add(decodeRadioButton);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		optionsPanel.add(horizontalStrut_2);
+		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
+		commandsPanel.add(horizontalStrut_4);
 		
-		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
-		optionsPanel.add(horizontalStrut_6);
-		
-		//getSpinnerValue(rightRtrSpinner);
+		//Bottom Panel
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setBackground(Color.DARK_GRAY);
+		bottomPanel.setLayout(new GridLayout(2,1,100,0));
+		bottomPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		getContentPane().add(bottomPanel);
 		
 		//Light Panel
 		JPanel lightPanel = new JPanel();
+		lightPanel.setBackground(Color.DARK_GRAY);
 		lightPanel.setLayout(new GridLayout(3,9,5,15));
 		lightPanel.setBorder(BorderFactory.createEmptyBorder(10, 45, 10, 0));
-		getContentPane().add(lightPanel);
+		bottomPanel.add(lightPanel);
 		
 		createLights(firstRow, lightPanel);
 		createLights(secondRow, lightPanel);
@@ -205,9 +235,10 @@ public class EnigmaGUI extends JFrame {
 		
 		//Button Panel
 		JPanel keyboardPanel = new JPanel();
+		keyboardPanel.setBackground(Color.DARK_GRAY);
 		keyboardPanel.setLayout(new GridLayout(3,9,5,15));
 		keyboardPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		getContentPane().add(keyboardPanel);
+		bottomPanel.add(keyboardPanel);
 		
 		createButtons(firstRow, keyboardPanel);
 		createButtons(secondRow, keyboardPanel);
@@ -282,10 +313,12 @@ public class EnigmaGUI extends JFrame {
 	void createLights(char[] chars, JPanel panel){
 		JLabel[] lightRow = new JLabel[chars.length];
 		JPanel p = new JPanel(new GridLayout(1,chars.length));
+		p.setBackground(Color.DARK_GRAY);
 		
 		for (int i = 0; i < chars.length; ++i) {
 			lightRow[i] = new JLabel(chars[i] + "");
 			lightRow[i].setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 16));
+			lightRow[i].setForeground(Color.WHITE);
 			p.add(lightRow[i]);
 			addLightsToArray(lightRow[i]);
 		}
@@ -297,6 +330,7 @@ public class EnigmaGUI extends JFrame {
 		JButton[] keyRow = new JButton[keys.length];
 		
 		JPanel p = new JPanel(new GridLayout(1,keys.length));
+		p.setBackground(Color.DARK_GRAY);
 		
 		for (int i = 0; i < keys.length; ++i) {
 			keyRow[i] = new JButton(keys[i] + "");
