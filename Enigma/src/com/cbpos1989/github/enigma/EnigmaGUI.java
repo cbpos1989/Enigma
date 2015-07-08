@@ -52,9 +52,9 @@ public class EnigmaGUI extends JFrame {
 	private static final long serialVersionUID = -7470739719745441939L;
 	static boolean isDecoding = false;
 	
-	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
-	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
-	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
+	private char[] firstRow = {'Q','W','E','R','T','Z','U','I','O'};
+	private char[] secondRow = {'A','S','D','F','G','H','J','K'};
+	private char[] thirdRow = {'P','Y','X','C','V','B','N','M','L'};
 	private JLabel[] lights = new JLabel[26];
 	private int counter = 0;
 	final private EnigmaHandler eh;
@@ -66,6 +66,7 @@ public class EnigmaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public EnigmaGUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.DARK_GRAY);
 		eh = new EnigmaHandler(this);
 		initialiseGui();
@@ -244,6 +245,8 @@ public class EnigmaGUI extends JFrame {
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
 		
+		PlugBoardMenu pbm = new PlugBoardMenu();
+		pbm.setVisible(true);
 		setVisible(true);
 	}
 	
