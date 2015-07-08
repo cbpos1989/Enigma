@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.cbpos1989.github.enigma;
 
 
@@ -18,7 +21,6 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
-import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
@@ -27,6 +29,13 @@ import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.Insets;
 
+/**
+ * Class that implements all of the major GUI components.
+ * 
+ * @author Colm O'Sullivan
+ * @version 1.0  
+ * @dependencies None
+ */
 
 public class EnigmaGUI extends JFrame {
 
@@ -50,13 +59,10 @@ public class EnigmaGUI extends JFrame {
 	 */
 	public EnigmaGUI() {
 		eh = new EnigmaHandler(this);
-		setBounds(100, 100, 535, 435);
 		initialiseGui();
 	}
 	
 	void initialiseGui(){
-		
-		
 		GridLayout mainLayout = new GridLayout(4,1,100,0);
 		getContentPane().setLayout(mainLayout);
 		
@@ -190,6 +196,7 @@ public class EnigmaGUI extends JFrame {
 		
 		setVisible(true);
 	}
+	
 	
 	public JTextField getTextField(int index){
 		if(index == 1) {

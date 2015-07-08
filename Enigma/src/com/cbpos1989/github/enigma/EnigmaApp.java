@@ -9,8 +9,11 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
+ * Class that initialises the Enigma App.
+ * 
  * @author cbpos1989
- *
+ * @version 1.0  
+ * @dependencies None
  */
 public class EnigmaApp {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -25,7 +28,7 @@ public class EnigmaApp {
 	
 	void initialiseMenu(){
 		final EnigmaGUI eGui = new EnigmaGUI();
-		eGui.setBounds((screenWidth/2)-550, (screenHeight/2)-275, 550, 550);
+		eGui.setBounds((screenWidth/2)-275, (screenHeight/2)-300, 550, 575);
 		
 		eGui.setVisible(true);
 		
@@ -36,7 +39,7 @@ public class EnigmaApp {
 		            "Are you sure you want to quit app?", "Quiting Enigma App", 
 		            JOptionPane.YES_NO_OPTION,
 		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-		            System.exit(0);
+		        	System.exit(0);
 		        }
 		    }
 		});

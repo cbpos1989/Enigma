@@ -9,8 +9,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
+ * Class that defines the state and behaviour of the Enigma Rotor's.
+ * 
  * @author Colm O'Sullivan
- *
+ * @version 1.0  
+ * @dependencies None
  */
 public class Rotor {
 	private EnigmaGUI eGui;
@@ -123,6 +126,18 @@ public class Rotor {
 			case 'X': c = letterArray[23]; break;
 			case 'Y': c = letterArray[24]; break;
 			case 'Z': c = letterArray[25]; break;
+		}
+		
+		return c;
+	}
+	
+	public char decodeLetter(char c){
+	
+		for(int i = 0; i < letterArray.length; ++i){
+			if(c == letterArray[i]){
+				c = (char) (i + 65);
+				break;
+			}
 		}
 		
 		return c;

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.cbpos1989.github.enigma;
 
 import java.awt.Color;
@@ -8,12 +11,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
+ * Class that handles the logic of the App.
  * 
- */
-
-/**
  * @author Colm O'Sullivan
- *
+ * @version 1.0  
+ * @dependencies None
  */
 public class EnigmaHandler implements ActionListener{
 	private EnigmaGUI eGui;
@@ -44,6 +46,17 @@ public class EnigmaHandler implements ActionListener{
 	void keyPressed(String letter){
 		char codingLetter = letter.charAt(0);
 		
+
+		System.out.print("//End//\n");
+		this.lightUpLabel(codingLetter);
+		
+		checkRotorPosition(rotorRight);
+		checkRotorPosition(rotorMiddle);
+		checkRotorPosition(rotorLeft);
+	
+	}
+	
+	private void codeLetter(char codingLetter){
 		//First Pass through the rotor's
 		System.out.print("//1st Pass//");
 		codingLetter = rotorRight.codeLetter(codingLetter);
@@ -66,14 +79,32 @@ public class EnigmaHandler implements ActionListener{
 		
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
-		
+	}
 	
-		System.out.print("//End//\n");
-		this.lightUpLabel(codingLetter);
+	private void decodeLetter(char codingLetter){
+		//First Pass through the rotor's
+		System.out.print("//1st Pass//");
+		codingLetter = rotorRight.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
 		
-		checkRotorPosition(rotorRight);
-		checkRotorPosition(rotorMiddle);
-		checkRotorPosition(rotorLeft);
+		codingLetter = rotorMiddle.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		codingLetter = rotorLeft.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		//Second pass back through the rotor's in opposite direction
+		System.out.print("//2nd Pass//");
+		codingLetter = rotorLeft.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		codingLetter = rotorMiddle.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		codingLetter = rotorRight.decodeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		
 	}
 	
 	public void createRotors(int rightRtr, int middleRtr, int leftRtr){
