@@ -27,7 +27,6 @@ public class EnigmaHandler implements ActionListener{
 	public EnigmaHandler(EnigmaGUI eGui){
 		this.eGui = eGui;
 		this.hasRotors = false;
-		
 	}
 
 	@Override
@@ -46,6 +45,11 @@ public class EnigmaHandler implements ActionListener{
 	void keyPressed(String letter){
 		char codingLetter = letter.charAt(0);
 		
+		if (EnigmaGUI.isDecoding) {
+			codingLetter = decodeLetter(codingLetter);
+		} else {
+			codingLetter = codeLetter(codingLetter);
+		}
 
 		System.out.print("//End//\n");
 		this.lightUpLabel(codingLetter);
@@ -56,7 +60,7 @@ public class EnigmaHandler implements ActionListener{
 	
 	}
 	
-	private void codeLetter(char codingLetter){
+	private char codeLetter(char codingLetter){
 		//First Pass through the rotor's
 		System.out.print("//1st Pass//");
 		codingLetter = rotorRight.codeLetter(codingLetter);
@@ -79,9 +83,11 @@ public class EnigmaHandler implements ActionListener{
 		
 		codingLetter = rotorRight.codeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
+		
+		return codingLetter;
 	}
 	
-	private void decodeLetter(char codingLetter){
+	private char decodeLetter(char codingLetter){
 		//First Pass through the rotor's
 		System.out.print("//1st Pass//");
 		codingLetter = rotorRight.decodeLetter(codingLetter);
@@ -104,6 +110,7 @@ public class EnigmaHandler implements ActionListener{
 		codingLetter = rotorRight.decodeLetter(codingLetter);
 		System.out.print(codingLetter + " ");
 		
+		return codingLetter;
 		
 	}
 	

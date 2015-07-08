@@ -28,6 +28,11 @@ import javax.swing.Box;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.Insets;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 /**
  * Class that implements all of the major GUI components.
@@ -43,6 +48,7 @@ public class EnigmaGUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -7470739719745441939L;
+	static boolean isDecoding = false;
 	
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
@@ -165,6 +171,19 @@ public class EnigmaGUI extends JFrame {
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		optionsPanel.add(horizontalStrut_3);
 		optionsPanel.add(btnCommitRotors);
+		
+		JRadioButton decodeRadioButton = new JRadioButton("Decode Message");
+		decodeRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(!isDecoding){
+					isDecoding = true;
+				} else {
+					isDecoding = false;
+				}
+			}
+		});
+		decodeRadioButton.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
+		optionsPanel.add(decodeRadioButton);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		optionsPanel.add(horizontalStrut_2);
