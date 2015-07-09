@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JToggleButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * Class that implements the GUI components of the Plugboard.
@@ -31,7 +33,6 @@ public class PlugBoardMenu extends JFrame {
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
 	private PlugBoardHandler pbh;
-	private JPanel topPlugPanel;
 	
 	/**
 	 * Create the frame.
@@ -40,43 +41,40 @@ public class PlugBoardMenu extends JFrame {
 		this.pbh = new PlugBoardHandler(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 300);
-		GridLayout mainLayout = new GridLayout(2,1,10,10);
+		GridLayout mainLayout = new GridLayout(1,1,10,10);
 		getContentPane().setLayout(mainLayout);
 		initialiseGui();
 	}
 	
 	void initialiseGui(){
-		//Top Plugboard Panel
-		topPlugPanel = new JPanel();
-		topPlugPanel.setLayout(new GridLayout(4,1,10,10));
-		topPlugPanel.setBackground(Color.DARK_GRAY);
-		getContentPane().add(topPlugPanel);
+		//Plugboard Panel
+		JPanel plugPanel = new JPanel();
+		plugPanel.setLayout(new GridLayout(5,1,10,10));
+		plugPanel.setBackground(Color.DARK_GRAY);
+		getContentPane().add(plugPanel);
 		
 		JLabel plugboardLabel = new JLabel("Enigma Plugboard");
 		plugboardLabel.setForeground(Color.LIGHT_GRAY);
 		plugboardLabel.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
 		plugboardLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		topPlugPanel.add(plugboardLabel);
+		plugPanel.add(plugboardLabel);
 		
-		//Top Plugboard Panel
-		JPanel bottomPlugPanel = new JPanel();
-		bottomPlugPanel.setLayout(new GridLayout(4,1,10,10));
-		bottomPlugPanel.setBackground(Color.DARK_GRAY);
-		getContentPane().add(bottomPlugPanel);
-				
-		createPlugs(firstRow, topPlugPanel);
-		createPlugs(secondRow, topPlugPanel);
-		createPlugs(thirdRow, topPlugPanel);
-		
-		createPlugs(firstRow, bottomPlugPanel);
-		createPlugs(secondRow, bottomPlugPanel);
-		createPlugs(thirdRow, bottomPlugPanel);
+		createPlugs(firstRow, plugPanel);
+		createPlugs(secondRow, plugPanel);
+		createPlugs(thirdRow, plugPanel);
 		
 		JButton linkButton = new JButton("Link Letters");
+		linkButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				
+			}
+		});
 		linkButton.setMargin(new Insets(2, 2, 2, 2));
 		linkButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		linkButton.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
-		bottomPlugPanel.add(linkButton);
+		plugPanel.add(linkButton);
+		
+		
 		
 		setVisible(true);
 	}

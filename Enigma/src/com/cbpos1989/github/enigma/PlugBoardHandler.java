@@ -5,10 +5,6 @@ package com.cbpos1989.github.enigma;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.Icon;
 import javax.swing.JToggleButton;
 
 /**
@@ -21,7 +17,8 @@ import javax.swing.JToggleButton;
 
 public class PlugBoardHandler implements ActionListener{
 	private PlugBoardMenu pbm;
-	private JToggleButton[] selectedButtons = new JToggleButton[2];
+	private char[] selectedButtons = new char[2];
+	private char[][] plugPairs = {{'A','A'},{'B','B'},{'C','C'},{'D','D'},{'E','E'},{'F','F'},{'G','G'},{'H','H'},{'I','I'},{'J','J'},{'K','K'},{'L','L'},{'M','M'},{'N','N'},{'O','O'},{'P','P'},{'Q','Q'},{'R','R'},{'S','S'},{'T','T'},{'U','U'},{'V','V'},{'W','W'},{'X','X'},{'Y','Y'},{'Z','Z'}};
 	
 	
 	public int buttonCounter = 0;
@@ -36,7 +33,7 @@ public class PlugBoardHandler implements ActionListener{
 		JToggleButton tBtn = (JToggleButton)event.getSource();
 		if(tBtn.isSelected()){
 			if (buttonCounter < 2){
-				selectedButtons[buttonCounter] = tBtn;
+				//selectedButtons[buttonCounter] = tBtn;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
@@ -45,33 +42,22 @@ public class PlugBoardHandler implements ActionListener{
 				System.out.print("No more buttons ");
 			}
 		} else {
-			selectedButtons[buttonCounter -1] = null;
+			//selectedButtons[buttonCounter -1] = null;
 			buttonCounter--;
 			System.out.print("Deselected ");
 		}
-		
-		
-//		if (buttonCounter > 1 && (selectedButtons[0] != tBtn || selectedButtons[1] != tBtn)){
-//			//buttonCounter = 2;
-//			tBtn.setSelected(false);
-//			
-//		} else if (buttonCounter > 1 && selectedButtons[1] == tBtn){
-//			selectedButtons[buttonCounter -1] = null;
-//			buttonCounter--;
-//			System.out.print("Deselected ");
-//		} else {
-//			selectedButtons[buttonCounter] = tBtn;
-//			buttonCounter++;
-//			System.out.print("Selected ");
-//			
-//			this.buttonPressed(event.getActionCommand());
-//		}
 		
 		System.out.print(buttonCounter + " \n");
 	}
 	
 	void buttonPressed(String letter){
+		char letterChar = letter.charAt(0);
 		System.out.print(letter + " ");
+		selectedButtons[buttonCounter] = letterChar;
+	}
+	
+	void addLetterToArray(){
+		
 	}
 
 
