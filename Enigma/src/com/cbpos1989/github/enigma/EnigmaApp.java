@@ -3,7 +3,7 @@
  */
 package com.cbpos1989.github.enigma;
 
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 

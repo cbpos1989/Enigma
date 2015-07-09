@@ -6,7 +6,6 @@ package com.cbpos1989.github.enigma;
 
 import java.awt.GridLayout;
 import java.text.ParseException;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -14,20 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpinnerListModel;
-
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.DefaultEditor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
-import java.awt.Container;
-
 import javax.swing.Box;
 import javax.swing.JTextField;
 import java.awt.Dimension;
