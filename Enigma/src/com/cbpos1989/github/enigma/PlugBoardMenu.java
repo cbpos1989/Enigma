@@ -32,6 +32,7 @@ public class PlugBoardMenu extends JFrame {
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
+	//private JToggleButton[] toggleButtons = new JToggleButton 
 	private PlugBoardHandler pbh;
 	
 	/**
@@ -79,8 +80,6 @@ public class PlugBoardMenu extends JFrame {
 		setVisible(true);
 	}
 
-	
-	
 	void createPlugs(char[] chars, JPanel panel){
 		JToggleButton[] plugRow = new JToggleButton[chars.length];
 		JPanel p = new JPanel(new GridLayout(1,chars.length,5,5));
@@ -103,5 +102,10 @@ public class PlugBoardMenu extends JFrame {
 		for (JToggleButton b: buttons) {
 			b.addActionListener(pbh);
 		}
+	}
+
+	void lightUpPlugs(JToggleButton tBtnOne, JToggleButton tBtnTwo, Color colour){
+		tBtnOne.setBackground(colour);
+		tBtnTwo.setBackground(colour);
 	}
 }
