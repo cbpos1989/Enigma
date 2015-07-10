@@ -21,7 +21,6 @@ public class PlugBoardHandler implements ActionListener{
 	private char[] selectedButtons = new char[2];
 	private char[][] plugPairs = new char[13][13];
 	private int i = 0;
-	private int j = 0;
 	private JToggleButton[] tBtn = new JToggleButton[2];
 	
 	private Color aqua = new Color(122,250,208);
@@ -40,15 +39,17 @@ public class PlugBoardHandler implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 	
-		tBtn[buttonCounter] = (JToggleButton)event.getSource();
-		if(tBtn[buttonCounter].isSelected()){
+		
+		JToggleButton temp = (JToggleButton)event.getSource();
+		if(temp.isSelected()){
 			if (buttonCounter < 2){
+				tBtn[buttonCounter] = temp;
 				//selectedButtons[buttonCounter] = tBtn;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
 			} else {
-				tBtn[buttonCounter].setSelected(false);
+				temp.setSelected(false);
 				System.out.print("No more buttons ");
 			}
 		} else {
@@ -67,34 +68,37 @@ public class PlugBoardHandler implements ActionListener{
 	}
 	
 	void addLetterToArray(){
-		if(buttonCounter < 1){
+		int j = 0;
+		if(buttonCounter < selectedButtons.length){
 			System.out.print("Need to select two buttons");
+			
 		} else {
 			for (char c: selectedButtons){
 				plugPairs[i][j] = c;
 				j++;
 			}
 			
-			//increment row and reset columns
+			//increment row
 			i++;
-			j = 0;
+			
+			pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
+			//reset selected chars
+			selectedButtons[0] = 0;
+			selectedButtons[1] = 0;
+			
+			//set selectedToggle button back to default state
+			tBtn[0].setSelected(false);
+			tBtn[1].setSelected(false);
+			
+			//reset selected buttons
+			tBtn[0] = null;
+			tBtn[1] = null;
+			
+			//reset button counter
+			buttonCounter = 0;
 		}
 		
-		pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
-		//reset selected chars
-		selectedButtons[0] = 0;
-		selectedButtons[1] = 0;
-		
-		//set selectedToggle button back to default state
-		tBtn[0].setSelected(false);
-		tBtn[1].setSelected(false);
-		
-		//reset selected buttons
-		tBtn[0] = null;
-		tBtn[1] = null;
-		
-		//reset button counter
-		buttonCounter = 0;
+	
 	}
 	
 	//Search for passed in letter in 2D Array if found return its matching pair, otherwise return passed in letter.
