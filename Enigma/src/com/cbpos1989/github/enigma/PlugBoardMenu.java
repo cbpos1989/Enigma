@@ -66,14 +66,14 @@ public class PlugBoardMenu extends JFrame {
 		JButton linkButton = new JButton("Link Letters");
 		linkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				
+				pbh.addLetterToArray();
+				pbh.printArray();
 			}
 		});
 		linkButton.setMargin(new Insets(2, 2, 2, 2));
 		linkButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		linkButton.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
 		plugPanel.add(linkButton);
-		
 		
 		
 		setVisible(true);
