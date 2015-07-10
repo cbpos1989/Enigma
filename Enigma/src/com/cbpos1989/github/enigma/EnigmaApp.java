@@ -20,6 +20,8 @@ public class EnigmaApp {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int screenHeight = (int)screenSize.getHeight();
 	private int screenWidth = (int)screenSize.getWidth();
+	private PlugBoardHandler pbh;
+	private PlugBoardMenu pbm;
 	
 	public static void main(String[] args){
 		System.out.println("Working");
@@ -28,9 +30,14 @@ public class EnigmaApp {
 	}
 	
 	void initialiseMenu(){
-		final EnigmaGUI eGui = new EnigmaGUI();
+		pbm = new PlugBoardMenu();
+		pbm.setVisible(false);
+		pbh = new PlugBoardHandler(pbm);
+		final EnigmaGUI eGui = new EnigmaGUI(pbh,pbm);
+		
 		eGui.setBounds((screenWidth/2)-275, (screenHeight/2)-300, 550, 575);
 		eGui.setVisible(true);
+		
 		
 		eGui.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override

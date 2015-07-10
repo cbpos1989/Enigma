@@ -24,7 +24,7 @@ public class PlugBoardHandler implements ActionListener{
 	private int j = 0;
 	private JToggleButton[] tBtn = new JToggleButton[2];
 	
-	private Color lime = new Color(169,250,122);
+	private Color aqua = new Color(122,250,208);
 	private Color skyBlue = new Color(204,229,255);
 	private Color purple = new Color(127,0,225);
 	private Color darkGreen = new Color(0,102,51);
@@ -32,9 +32,10 @@ public class PlugBoardHandler implements ActionListener{
 	
 	public int buttonCounter = 0;
 	
-	public PlugBoardHandler(PlugBoardMenu pbm){
+	public PlugBoardHandler(PlugBoardMenu pbm ){
 		this.pbm = pbm;
 	}
+
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -96,6 +97,24 @@ public class PlugBoardHandler implements ActionListener{
 		buttonCounter = 0;
 	}
 	
+	//Search for passed in letter in 2D Array if found return its matching pair, otherwise return passed in letter.
+	char plugBoardSwitch(char letter){
+		
+		for (int i = 0; i < plugPairs.length; ++i) {
+			for(int j = 0; j < 2; ++j){
+				if(plugPairs[i][j] == letter){
+					if(j == 0){
+						return plugPairs[i][j+1];
+					} else {
+						return plugPairs[i][j-1];
+					}
+				}
+			}
+		}
+		
+		return letter;
+	}
+	
 	Color colourPicker(int index){
 		switch(index){
 			case 1: return Color.BLUE; 
@@ -106,7 +125,7 @@ public class PlugBoardHandler implements ActionListener{
 			case 6: return Color.ORANGE; 
 			case 7: return Color.PINK; 
 			case 8: return Color.YELLOW; 
-			case 9: return lime; 
+			case 9: return aqua; 
 			case 10: return purple; 
 			case 11: return skyBlue; 
 			case 12: return darkGreen;
@@ -115,6 +134,7 @@ public class PlugBoardHandler implements ActionListener{
 		}
 	}
 	
+	//Testing purposes
 	void printArray(){
 		for(char[] c: plugPairs){
 			System.out.println(c);

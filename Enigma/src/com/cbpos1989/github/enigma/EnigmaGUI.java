@@ -51,6 +51,8 @@ public class EnigmaGUI extends JFrame {
 	private JLabel[] lights = new JLabel[26];
 	private int counter = 0;
 	final private EnigmaHandler eh;
+	private PlugBoardHandler pbh;
+	private PlugBoardMenu pbm;
 	private JTextField leftRtrTextField;
 	private JTextField middleRtrTextField;
 	private JTextField rightRtrTextField;
@@ -58,10 +60,12 @@ public class EnigmaGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EnigmaGUI() {
+	public EnigmaGUI(PlugBoardHandler pbh, PlugBoardMenu pbm) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.DARK_GRAY);
-		eh = new EnigmaHandler(this);
+		this.pbh = pbh;
+		this.pbm = pbm;
+		eh = new EnigmaHandler(this, pbh);
 		initialiseGui();
 	}
 	
@@ -172,8 +176,6 @@ public class EnigmaGUI extends JFrame {
 		JButton btnCommitRotors = new JButton("Set Rotors");
 		btnCommitRotors.setMargin(new Insets(2, 2, 2, 2));
 		btnCommitRotors.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnCommitRotors.setPreferredSize(new Dimension(206, 23));
-		btnCommitRotors.setMaximumSize(new Dimension(206, 23));
 		btnCommitRotors.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 14));
 		btnCommitRotors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -227,6 +229,7 @@ public class EnigmaGUI extends JFrame {
 		createLights(secondRow, lightPanel);
 		createLights(thirdRow, lightPanel);
 		
+		
 		//Button Panel
 		JPanel keyboardPanel = new JPanel();
 		keyboardPanel.setBackground(Color.DARK_GRAY);
@@ -234,12 +237,22 @@ public class EnigmaGUI extends JFrame {
 		keyboardPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		bottomPanel.add(keyboardPanel);
 		
+		JButton btnPlugBoard = new JButton("Access PlugBoard");
+		btnPlugBoard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				pbm.setVisible(true);
+			}
+		});
+		btnPlugBoard.setMargin(new Insets(2, 2, 2, 2));
+		btnPlugBoard.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnPlugBoard.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
+		bottomPanel.add(btnPlugBoard);
+		
 		createButtons(firstRow, keyboardPanel);
 		createButtons(secondRow, keyboardPanel);
 		createButtons(thirdRow, keyboardPanel);
 		
-		PlugBoardMenu pbm = new PlugBoardMenu();
-		pbm.setVisible(true);
+		
 		setVisible(true);
 	}
 	

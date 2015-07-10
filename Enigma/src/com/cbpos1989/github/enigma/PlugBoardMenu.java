@@ -32,14 +32,15 @@ public class PlugBoardMenu extends JFrame {
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
-	//private JToggleButton[] toggleButtons = new JToggleButton 
 	private PlugBoardHandler pbh;
+	
 	
 	/**
 	 * Create the frame.
 	 */
 	public PlugBoardMenu() {
 		this.pbh = new PlugBoardHandler(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 300);
 		GridLayout mainLayout = new GridLayout(1,1,10,10);

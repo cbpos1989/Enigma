@@ -23,10 +23,13 @@ public class EnigmaHandler implements ActionListener{
 	private Rotor rotorMiddle; 
 	private Rotor rotorLeft;
 	private boolean hasRotors;
+	private PlugBoardHandler pbh;
 	
-	public EnigmaHandler(EnigmaGUI eGui){
+	public EnigmaHandler(EnigmaGUI eGui, PlugBoardHandler pbh){
 		this.eGui = eGui;
 		this.hasRotors = false;
+		this.pbh = pbh;
+	
 	}
 
 	@Override
@@ -61,6 +64,10 @@ public class EnigmaHandler implements ActionListener{
 	}
 	
 	private char codeLetter(char codingLetter){
+		//Pass in through the plugBoard
+		
+		
+		
 		//First Pass through the rotor's
 		System.out.print("//1st Pass//");
 		codingLetter = rotorRight.codeLetter(codingLetter);
