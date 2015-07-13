@@ -44,13 +44,11 @@ public class PlugBoardHandler implements ActionListener{
 		if(temp.isSelected()){
 			if (buttonCounter < 2 && tBtn[0] == null){
 				tBtn[0] = temp;
-				//selectedButtons[buttonCounter] = tBtn;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
 			} else if(buttonCounter < 2 && tBtn[1] == null){
 				tBtn[1] = temp;
-				//selectedButtons[buttonCounter] = tBtn;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
@@ -64,7 +62,6 @@ public class PlugBoardHandler implements ActionListener{
 				if(tBtn[i] == temp){
 					System.out.print("Deselected ");
 					tBtn[i] = null;
-					
 				}
 			}
 			buttonCounter--;
@@ -86,14 +83,21 @@ public class PlugBoardHandler implements ActionListener{
 			
 		} else {
 			for (char c: selectedButtons){
+				checkArray(c);
 				plugPairs[i][j] = c;
 				j++;
 			}
+		
 			
-			//increment row
-			i++;
+			//increment row, reset if hits limit of pairs
+			if(i < 12){
+				i++;
+			} else {
+				i = 0;
+			}
 			
 			pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
+			
 			//reset selected chars
 			selectedButtons[0] = 0;
 			selectedButtons[1] = 0;
@@ -111,6 +115,17 @@ public class PlugBoardHandler implements ActionListener{
 		}
 		
 	
+	}
+	
+	void checkArray(char checkLetter){
+		for(int i = 0; i < plugPairs.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(plugPairs[i][j] == checkLetter){
+					plugPairs[i][0] = ' ';
+					plugPairs[i][1] = ' ';
+				}
+			}
+		}
 	}
 	
 	//Search for passed in letter in 2D Array if found return its matching pair, otherwise return passed in letter.
@@ -146,7 +161,7 @@ public class PlugBoardHandler implements ActionListener{
 			case 11: return skyBlue; 
 			case 12: return darkGreen;
 			case 13: return navy; 
-			default: return Color.BLACK;
+			default: return Color.GREEN;
 		}
 	}
 	
