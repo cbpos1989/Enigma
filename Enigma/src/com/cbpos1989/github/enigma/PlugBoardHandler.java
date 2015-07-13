@@ -92,11 +92,13 @@ public class PlugBoardHandler implements ActionListener{
 			//increment row, reset if hits limit of pairs
 			if(i < 12){
 				i++;
+				pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
 			} else {
+				pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(13));
 				i = 0;
 			}
 			
-			pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
+			
 			
 			//reset selected chars
 			selectedButtons[0] = 0;
