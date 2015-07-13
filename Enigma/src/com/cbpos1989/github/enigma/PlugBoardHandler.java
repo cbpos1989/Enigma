@@ -42,20 +42,32 @@ public class PlugBoardHandler implements ActionListener{
 		
 		JToggleButton temp = (JToggleButton)event.getSource();
 		if(temp.isSelected()){
-			if (buttonCounter < 2){
-				tBtn[buttonCounter] = temp;
+			if (buttonCounter < 2 && tBtn[0] == null){
+				tBtn[0] = temp;
 				//selectedButtons[buttonCounter] = tBtn;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
-			} else {
+			} else if(buttonCounter < 2 && tBtn[1] == null){
+				tBtn[1] = temp;
+				//selectedButtons[buttonCounter] = tBtn;
+				buttonCounter++;
+				System.out.print("Selected ");
+				this.buttonPressed(event.getActionCommand());
+			}else {
 				temp.setSelected(false);
 				System.out.print("No more buttons ");
 			}
 		} else {
+			
+			for(int i = 0; i < tBtn.length; ++i){
+				if(tBtn[i] == temp){
+					System.out.print("Deselected ");
+					tBtn[i] = null;
+					
+				}
+			}
 			buttonCounter--;
-			tBtn[buttonCounter] = null;
-			System.out.print("Deselected ");
 		}
 		
 		System.out.print(buttonCounter + " \n");
