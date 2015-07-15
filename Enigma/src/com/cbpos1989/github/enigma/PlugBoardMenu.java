@@ -32,8 +32,10 @@ public class PlugBoardMenu extends JFrame {
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
+	private JToggleButton[][] toggleButtons = new JToggleButton[13][2];
+	private int indexRow = 0;
+	private int indexColumn = 0;
 	private PlugBoardHandler pbh;
-	
 	
 	/**
 	 * Create the frame.
@@ -91,6 +93,8 @@ public class PlugBoardMenu extends JFrame {
 			plugRow[i].setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 16));
 			plugRow[i].setForeground(Color.BLACK);
 			plugRow[i].setAlignmentY(CENTER_ALIGNMENT);
+			addPlugsToArray(plugRow[i]);
+			addPlugsToArray(plugRow[i]);
 			p.add(plugRow[i]);
 			
 		}
@@ -99,14 +103,43 @@ public class PlugBoardMenu extends JFrame {
 		panel.add(p);
 	}
 	
+	void addPlugsToArray(JToggleButton tBtn){
+		this.toggleButtons[indexRow][indexColumn] = tBtn;
+		
+		if(indexRow < 13){
+			indexRow++;
+		} else {
+			indexRow = 0;
+		}
+		if(indexColumn < 1){
+			indexColumn++;
+		} else {
+			indexColumn = 0;
+		}
+	}
+	
 	void addPlugListeners(JToggleButton[] buttons){
 		for (JToggleButton b: buttons) {
 			b.addActionListener(pbh);
 		}
 	}
 
+	void lightUpBoard(JToggleButton[][] toggleButtons){
+		for(int i = 0; i < toggleButtons.length; ++i){
+			for(int j = 0; j < toggleButtons.length; ++j){
+				if(toggleButtons[i][j] == null){
+					
+				}
+			}
+		}
+	}
+	
 	void lightUpPlugs(JToggleButton tBtnOne, JToggleButton tBtnTwo, Color colour){
 		tBtnOne.setBackground(colour);
 		tBtnTwo.setBackground(colour);
+	}
+	
+	void turnOffPlugLight(JToggleButton tBtn, Color colour){
+		tBtn.setBackground(colour);
 	}
 }

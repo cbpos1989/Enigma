@@ -21,13 +21,18 @@ public class PlugBoardHandler implements ActionListener{
 	private char[] selectedButtons = new char[2];
 	private char[][] plugPairs = new char[13][13];
 	private int i = 0;
+	private int indexRow = 0;
+	private int indexColumn = 0;
 	private JToggleButton[] tBtn = new JToggleButton[2];
+	private JToggleButton[][] toggleButtons = {{}};
+	
 	
 	private Color aqua = new Color(122,250,208);
 	private Color skyBlue = new Color(204,229,255);
 	private Color purple = new Color(127,0,225);
 	private Color darkGreen = new Color(0,102,51);
 	private Color navy = new Color(0,0,153);
+
 	
 	public int buttonCounter = 0;
 	
@@ -40,27 +45,32 @@ public class PlugBoardHandler implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 	
 		
-		JToggleButton temp = (JToggleButton)event.getSource();
-		if(temp.isSelected()){
+		JToggleButton tButton = (JToggleButton)event.getSource();
+	
+		if(tButton.isSelected()){
 			if (buttonCounter < 2 && tBtn[0] == null){
-				tBtn[0] = temp;
+				addButtonToArray(tButton);
+				tBtn[0] = tButton;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
 			} else if(buttonCounter < 2 && tBtn[1] == null){
-				tBtn[1] = temp;
+				addButtonToArray(tButton);
+				tBtn[1] = tButton;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
 			}else {
-				temp.setSelected(false);
+				tButton.setSelected(false);
 				System.out.print("No more buttons ");
 			}
 		} else {
+			removeButtonFromArray(tButton);
 			
 			for(int i = 0; i < tBtn.length; ++i){
-				if(tBtn[i] == temp){
+				if(tBtn[i] == tButton){
 					System.out.print("Deselected ");
+					
 					tBtn[i] = null;
 				}
 			}
@@ -68,12 +78,40 @@ public class PlugBoardHandler implements ActionListener{
 		}
 		
 		System.out.print(buttonCounter + " \n");
+		
 	}
 	
 	void buttonPressed(String letter){
 		char letterChar = letter.charAt(0);
 		System.out.print(letter + " ");
 		selectedButtons[buttonCounter - 1] = letterChar;
+	}
+	
+	void removeButtonFromArray(JToggleButton tBtn){
+		for(int i = 0; i < toggleButtons.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(toggleButtons[i][j] == tBtn){
+					System.out.print("Deselected ");
+				
+					toggleButtons[i][j] = null;
+				}
+			}
+		}
+	}
+	
+	void addButtonToArray(JToggleButton tBtn){
+		toggleButtons[indexRow][indexColumn] = tBtn;
+		
+		if(indexRow < 13){
+			indexRow++;
+		} else {
+			indexRow = 0;
+		}
+		if(indexColumn < 1){
+			indexColumn++;
+		} else {
+			indexColumn = 0;
+		}
 	}
 	
 	void addLetterToArray(){
@@ -99,7 +137,6 @@ public class PlugBoardHandler implements ActionListener{
 			}
 			
 			
-			
 			//reset selected chars
 			selectedButtons[0] = 0;
 			selectedButtons[1] = 0;
@@ -123,6 +160,7 @@ public class PlugBoardHandler implements ActionListener{
 		for(int i = 0; i < plugPairs.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(plugPairs[i][j] == checkLetter){
+					
 					plugPairs[i][0] = ' ';
 					plugPairs[i][1] = ' ';
 				}
