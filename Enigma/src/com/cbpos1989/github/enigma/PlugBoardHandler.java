@@ -24,7 +24,7 @@ public class PlugBoardHandler implements ActionListener{
 	private int indexRow = 0;
 	private int indexColumn = 0;
 	private JToggleButton[] tBtn = new JToggleButton[2];
-	private JToggleButton[][] toggleButtons = {{}};
+	private JToggleButton[][] toggleButtons = new JToggleButton[13][2];
 	
 	
 	private Color aqua = new Color(122,250,208);
@@ -49,13 +49,11 @@ public class PlugBoardHandler implements ActionListener{
 	
 		if(tButton.isSelected()){
 			if (buttonCounter < 2 && tBtn[0] == null){
-				addButtonToArray(tButton);
 				tBtn[0] = tButton;
 				buttonCounter++;
 				System.out.print("Selected ");
 				this.buttonPressed(event.getActionCommand());
 			} else if(buttonCounter < 2 && tBtn[1] == null){
-				addButtonToArray(tButton);
 				tBtn[1] = tButton;
 				buttonCounter++;
 				System.out.print("Selected ");
@@ -65,7 +63,6 @@ public class PlugBoardHandler implements ActionListener{
 				System.out.print("No more buttons ");
 			}
 		} else {
-			removeButtonFromArray(tButton);
 			
 			for(int i = 0; i < tBtn.length; ++i){
 				if(tBtn[i] == tButton){
@@ -99,19 +96,30 @@ public class PlugBoardHandler implements ActionListener{
 		}
 	}
 	
-	void addButtonToArray(JToggleButton tBtn){
-		toggleButtons[indexRow][indexColumn] = tBtn;
+	void addButtonToArray(){
+		int j = 0;
+		
+		for (JToggleButton tb: tBtn){
+			checkButtonArray(tb);
+			toggleButtons[i][j] = tb;
+			j++;
+		}
+		
+		pbm.lightUpBoard(toggleButtons);
 		
 		if(indexRow < 13){
 			indexRow++;
 		} else {
 			indexRow = 0;
 		}
-		if(indexColumn < 1){
-			indexColumn++;
-		} else {
-			indexColumn = 0;
-		}
+		
+		//set selectedToggle button back to default state
+		tBtn[0].setSelected(false);
+		tBtn[1].setSelected(false);
+	
+		//reset selected buttons
+		tBtn[0] = null;
+		tBtn[1] = null;
 	}
 	
 	void addLetterToArray(){
@@ -121,7 +129,7 @@ public class PlugBoardHandler implements ActionListener{
 			
 		} else {
 			for (char c: selectedButtons){
-				checkArray(c);
+				checkCharArray(c);
 				plugPairs[i][j] = c;
 				j++;
 			}
@@ -130,9 +138,9 @@ public class PlugBoardHandler implements ActionListener{
 			//increment row, reset if hits limit of pairs
 			if(i < 12){
 				i++;
-				pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
+				//pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
 			} else {
-				pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(13));
+				//pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(13));
 				i = 0;
 			}
 			
@@ -141,14 +149,6 @@ public class PlugBoardHandler implements ActionListener{
 			selectedButtons[0] = 0;
 			selectedButtons[1] = 0;
 			
-			//set selectedToggle button back to default state
-			tBtn[0].setSelected(false);
-			tBtn[1].setSelected(false);
-			
-			//reset selected buttons
-			tBtn[0] = null;
-			tBtn[1] = null;
-			
 			//reset button counter
 			buttonCounter = 0;
 		}
@@ -156,7 +156,21 @@ public class PlugBoardHandler implements ActionListener{
 	
 	}
 	
-	void checkArray(char checkLetter){
+	//Ensures that one button will not be linked with another twice over in the array
+	void checkButtonArray(JToggleButton tBtn){
+		for(int i = 0; i < toggleButtons.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(toggleButtons[i][j] == tBtn){
+					
+					toggleButtons[i][0] = null;
+					toggleButtons[i][1] = null;
+				}
+			}
+		}
+	}
+	
+	//Ensures that one char will not be linked with another twice over in the array
+	void checkCharArray(char checkLetter){
 		for(int i = 0; i < plugPairs.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(plugPairs[i][j] == checkLetter){

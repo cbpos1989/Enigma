@@ -32,9 +32,9 @@ public class PlugBoardMenu extends JFrame {
 	private char firstRow[] = {'Q','W','E','R','T','Z','U','I','O'};
 	private char secondRow[] = {'A','S','D','F','G','H','J','K'};
 	private char thirdRow[] = {'P','Y','X','C','V','B','N','M','L'};
-	private JToggleButton[][] toggleButtons = new JToggleButton[13][2];
+	private JToggleButton[] toggleButtonsDefault = new JToggleButton[26];
+	private Color defaultColour;
 	private int indexRow = 0;
-	private int indexColumn = 0;
 	private PlugBoardHandler pbh;
 	
 	/**
@@ -71,7 +71,9 @@ public class PlugBoardMenu extends JFrame {
 		linkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				pbh.addLetterToArray();
+				pbh.addButtonToArray();
 				pbh.printArray();
+				
 			}
 		});
 		linkButton.setMargin(new Insets(2, 2, 2, 2));
@@ -94,9 +96,7 @@ public class PlugBoardMenu extends JFrame {
 			plugRow[i].setForeground(Color.BLACK);
 			plugRow[i].setAlignmentY(CENTER_ALIGNMENT);
 			addPlugsToArray(plugRow[i]);
-			addPlugsToArray(plugRow[i]);
 			p.add(plugRow[i]);
-			
 		}
 		
 		addPlugListeners(plugRow);
@@ -104,18 +104,9 @@ public class PlugBoardMenu extends JFrame {
 	}
 	
 	void addPlugsToArray(JToggleButton tBtn){
-		this.toggleButtons[indexRow][indexColumn] = tBtn;
-		
-		if(indexRow < 13){
-			indexRow++;
-		} else {
-			indexRow = 0;
-		}
-		if(indexColumn < 1){
-			indexColumn++;
-		} else {
-			indexColumn = 0;
-		}
+		toggleButtonsDefault[indexRow] = tBtn;
+		defaultColour = tBtn.getBackground();
+		indexRow++;
 	}
 	
 	void addPlugListeners(JToggleButton[] buttons){
@@ -125,18 +116,24 @@ public class PlugBoardMenu extends JFrame {
 	}
 
 	void lightUpBoard(JToggleButton[][] toggleButtons){
-		for(int i = 0; i < toggleButtons.length; ++i){
-			for(int j = 0; j < toggleButtons.length; ++j){
-				if(toggleButtons[i][j] == null){
-					
-				}
+		
+		for(JToggleButton tBtn: toggleButtonsDefault){
+			tBtn.setBackground(defaultColour);
+		}
+		
+		
+		for(int i = 0, j = 0; i < toggleButtons.length; ++i){
+			if(toggleButtons[i][j] != null){
+				lightUpPlugs(toggleButtons[i][j],toggleButtons[i][++j],pbh.colourPicker(i));
+				j = 0;
 			}
 		}
 	}
 	
-	void lightUpPlugs(JToggleButton tBtnOne, JToggleButton tBtnTwo, Color colour){
+	void lightUpPlugs(JToggleButton tBtnOne,JToggleButton tBtnTwo, Color colour){
 		tBtnOne.setBackground(colour);
 		tBtnTwo.setBackground(colour);
+		
 	}
 	
 	void turnOffPlugLight(JToggleButton tBtn, Color colour){
