@@ -65,8 +65,9 @@ public class EnigmaHandler implements ActionListener{
 	
 	private char codeLetter(char codingLetter){
 		//Pass in through the plugBoard
-		
-		
+		System.out.print("//Plugboard In//");
+		codingLetter = pbh.plugBoardSwitch(codingLetter);
+		System.out.print(codingLetter + " ");
 		
 		//First Pass through the rotor's
 		System.out.print("//1st Pass//");
@@ -89,6 +90,11 @@ public class EnigmaHandler implements ActionListener{
 		System.out.print(codingLetter + " ");
 		
 		codingLetter = rotorRight.codeLetter(codingLetter);
+		System.out.print(codingLetter + " ");
+		
+		//Pass out through the plugBoard
+		System.out.print("//Plugboard Out//");
+		codingLetter = pbh.plugBoardSwitch(codingLetter);
 		System.out.print(codingLetter + " ");
 		
 		return codingLetter;

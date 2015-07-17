@@ -27,6 +27,7 @@ public class PlugBoardHandler implements ActionListener{
 	private JToggleButton[][] toggleButtons = new JToggleButton[13][2];
 	
 	
+	
 	private Color aqua = new Color(122,250,208);
 	private Color skyBlue = new Color(204,229,255);
 	private Color purple = new Color(127,0,225);
@@ -101,13 +102,13 @@ public class PlugBoardHandler implements ActionListener{
 		
 		for (JToggleButton tb: tBtn){
 			checkButtonArray(tb);
-			toggleButtons[i][j] = tb;
+			toggleButtons[indexRow][j] = tb;
 			j++;
 		}
 		
 		pbm.lightUpBoard(toggleButtons);
 		
-		if(indexRow < 13){
+		if(indexRow < 12){
 			indexRow++;
 		} else {
 			indexRow = 0;
@@ -124,6 +125,7 @@ public class PlugBoardHandler implements ActionListener{
 	
 	void addLetterToArray(){
 		int j = 0;
+		
 		if(buttonCounter < selectedButtons.length){
 			System.out.print("Need to select two buttons");
 			
@@ -138,9 +140,7 @@ public class PlugBoardHandler implements ActionListener{
 			//increment row, reset if hits limit of pairs
 			if(i < 12){
 				i++;
-				//pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(i));
 			} else {
-				//pbm.lightUpPlugs(tBtn[0], tBtn[1], colourPicker(13));
 				i = 0;
 			}
 			
@@ -161,9 +161,17 @@ public class PlugBoardHandler implements ActionListener{
 		for(int i = 0; i < toggleButtons.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(toggleButtons[i][j] == tBtn){
-					
 					toggleButtons[i][0] = null;
 					toggleButtons[i][1] = null;
+				}
+			}
+		}
+		
+		for(int i = 0; i < toggleButtons.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(toggleButtons[i][j] != null){
+					indexRow++;
+					break;
 				}
 			}
 		}
@@ -174,9 +182,17 @@ public class PlugBoardHandler implements ActionListener{
 		for(int i = 0; i < plugPairs.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(plugPairs[i][j] == checkLetter){
-					
 					plugPairs[i][0] = ' ';
 					plugPairs[i][1] = ' ';
+				}
+			}
+		}
+		
+		for(int i = 0; i < plugPairs.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(plugPairs[i][j] != ' '){
+					this.i++;
+					break;
 				}
 			}
 		}
@@ -202,20 +218,20 @@ public class PlugBoardHandler implements ActionListener{
 	
 	Color colourPicker(int index){
 		switch(index){
-			case 1: return Color.BLUE; 
-			case 2: return Color.RED;
-			case 3: return Color.CYAN; 
-			case 4: return Color.GREEN;
-			case 5: return Color.MAGENTA; 
-			case 6: return Color.ORANGE; 
-			case 7: return Color.PINK; 
-			case 8: return Color.YELLOW; 
-			case 9: return aqua; 
-			case 10: return purple; 
-			case 11: return skyBlue; 
-			case 12: return darkGreen;
-			case 13: return navy; 
-			default: return Color.GREEN;
+			case 0: return Color.BLUE; 
+			case 1: return Color.RED;
+			case 2: return Color.CYAN; 
+			case 3: return Color.GREEN;
+			case 4: return Color.MAGENTA; 
+			case 5: return Color.ORANGE; 
+			case 6: return Color.PINK; 
+			case 7: return Color.YELLOW; 
+			case 8: return aqua; 
+			case 9: return purple; 
+			case 10: return skyBlue; 
+			case 11: return darkGreen;
+			case 12: return navy; 
+			default: return Color.BLACK;
 		}
 	}
 	
