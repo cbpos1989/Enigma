@@ -124,7 +124,7 @@ public class PlugBoardMenu extends JFrame {
 		
 		for(int i = 0, j = 0; i < toggleButtons.length; ++i){
 			if(toggleButtons[i][j] != null){
-				lightUpPlugs(toggleButtons[i][j],toggleButtons[i][++j],pbh.colourPicker(i));
+				lightUpPlugs(toggleButtons[i][j],toggleButtons[i][++j],pbh.colourPicker(i + 1));
 				j = 0;
 			}
 		}

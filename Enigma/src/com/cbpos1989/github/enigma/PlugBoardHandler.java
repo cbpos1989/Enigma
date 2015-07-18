@@ -19,7 +19,7 @@ import javax.swing.JToggleButton;
 public class PlugBoardHandler implements ActionListener{
 	private PlugBoardMenu pbm;
 	private char[] selectedButtons = new char[2];
-	private char[][] plugPairs = new char[13][13];
+	private char[][] plugPairs = new char[13][2];
 	private int i = 0;
 	private int indexRow = 0;
 	private int indexColumn = 0;
@@ -167,11 +167,12 @@ public class PlugBoardHandler implements ActionListener{
 			}
 		}
 		
+		outer:
 		for(int i = 0; i < toggleButtons.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(toggleButtons[i][j] != null){
 					indexRow++;
-					break;
+					break outer;
 				}
 			}
 		}
@@ -188,11 +189,12 @@ public class PlugBoardHandler implements ActionListener{
 			}
 		}
 		
+		outer:
 		for(int i = 0; i < plugPairs.length; ++i){
 			for(int j = 0; j < 2; ++j){
-				if(plugPairs[i][j] != ' '){
+				if(plugPairs[i][j] !=  ' '){
 					this.i++;
-					break;
+					break outer;
 				}
 			}
 		}
