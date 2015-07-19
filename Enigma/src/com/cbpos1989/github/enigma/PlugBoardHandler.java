@@ -130,7 +130,9 @@ public class PlugBoardHandler implements ActionListener{
 			System.out.print("Need to select two buttons");
 			
 		} else {
+			
 			for (char c: selectedButtons){
+				
 				checkCharArray(c);
 				plugPairs[i][j] = c;
 				j++;
@@ -151,6 +153,8 @@ public class PlugBoardHandler implements ActionListener{
 			
 			//reset button counter
 			buttonCounter = 0;
+			
+			printArray();
 		}
 		
 	
@@ -167,15 +171,17 @@ public class PlugBoardHandler implements ActionListener{
 			}
 		}
 		
-		outer:
-		for(int i = 0; i < toggleButtons.length; ++i){
-			for(int j = 0; j < 2; ++j){
-				if(toggleButtons[i][j] != null){
-					indexRow++;
-					break outer;
-				}
-			}
-		}
+
+//		for(int i = 0; i < toggleButtons.length; ++i){
+//		
+//			for(int j = 0; j < 2; ++j){
+//				if(toggleButtons[i][j] != null){
+//					indexRow++;
+//					System.out.println("indexRow has been incremneted " + indexRow);
+//					break;
+//				}
+//			}
+//		}
 	}
 	
 	//Ensures that one char will not be linked with another twice over in the array
@@ -183,21 +189,23 @@ public class PlugBoardHandler implements ActionListener{
 		for(int i = 0; i < plugPairs.length; ++i){
 			for(int j = 0; j < 2; ++j){
 				if(plugPairs[i][j] == checkLetter){
-					plugPairs[i][0] = ' ';
-					plugPairs[i][1] = ' ';
+					plugPairs[i][0] = '\u0000';
+					plugPairs[i][1] = '\u0000';
 				}
 			}
 		}
 		
-		outer:
-		for(int i = 0; i < plugPairs.length; ++i){
-			for(int j = 0; j < 2; ++j){
-				if(plugPairs[i][j] !=  ' '){
-					this.i++;
-					break outer;
-				}
-			}
-		}
+		
+//		for(int i = 0; i < plugPairs.length; ++i){
+//			
+//			for(int j = 0; j < 2; ++j){
+//				if(plugPairs[i][j] !=  '\u0000'){
+//					this.i++;
+//					System.out.println("i has been incremneted " + this.i);
+//					break;
+//				}
+//			}
+//		}
 	}
 	
 	//Search for passed in letter in 2D Array if found return its matching pair, otherwise return passed in letter.
@@ -239,9 +247,12 @@ public class PlugBoardHandler implements ActionListener{
 	
 	//Testing purposes
 	void printArray(){
-		for(char[] c: plugPairs){
-			System.out.println(c);
+		for(int i = 0; i < plugPairs.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				System.out.print(plugPairs[i][j]);
+			}
 		}
+		System.out.println("");
 	}
 
 
