@@ -112,6 +112,7 @@ public class PlugBoardHandler implements ActionListener{
 			indexRow++;
 		} else {
 			indexRow = 0;
+			checkButtonArrayOverwrite();
 		}
 		
 		//set selectedToggle button back to default state
@@ -131,19 +132,20 @@ public class PlugBoardHandler implements ActionListener{
 			
 		} else {
 			
+			
 			for (char c: selectedButtons){
-				
 				checkCharArray(c);
 				plugPairs[i][j] = c;
 				j++;
 			}
-		
+			
 			
 			//increment row, reset if hits limit of pairs
 			if(i < 12){
 				i++;
 			} else {
 				i = 0;
+				checkCharArrayOverwrite();
 			}
 			
 			
@@ -170,19 +172,24 @@ public class PlugBoardHandler implements ActionListener{
 				}
 			}
 		}
-		
-
-//		for(int i = 0; i < toggleButtons.length; ++i){
-//		
-//			for(int j = 0; j < 2; ++j){
-//				if(toggleButtons[i][j] != null){
-//					indexRow++;
-//					System.out.println("indexRow has been incremneted " + indexRow);
-//					break;
-//				}
-//			}
-//		}
 	}
+		
+	void checkButtonArrayOverwrite(){
+		outer:
+		for(int i = 0; i < toggleButtons.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(toggleButtons[i][j] !=  null){
+					this.indexRow++;
+					System.out.println("indexRow has been incremneted " + this.indexRow);
+					break;
+				} else {
+					System.out.println("indexRow has not been incremneted " + this.indexRow);
+					break outer;
+				}
+			}
+		}
+	}
+		
 	
 	//Ensures that one char will not be linked with another twice over in the array
 	void checkCharArray(char checkLetter){
@@ -194,18 +201,22 @@ public class PlugBoardHandler implements ActionListener{
 				}
 			}
 		}
-		
-		
-//		for(int i = 0; i < plugPairs.length; ++i){
-//			
-//			for(int j = 0; j < 2; ++j){
-//				if(plugPairs[i][j] !=  '\u0000'){
-//					this.i++;
-//					System.out.println("i has been incremneted " + this.i);
-//					break;
-//				}
-//			}
-//		}
+	}
+	
+	void checkCharArrayOverwrite(){
+		outer:
+		for(int i = 0; i < plugPairs.length; ++i){
+			for(int j = 0; j < 2; ++j){
+				if(plugPairs[i][j] !=  '\u0000'){
+					this.i++;
+					System.out.println("i has been incremneted " + this.i);
+					break;
+				} else {
+					System.out.println("i has not been incremneted " + this.i);
+					break outer;
+				}
+			}
+		}
 	}
 	
 	//Search for passed in letter in 2D Array if found return its matching pair, otherwise return passed in letter.
@@ -228,19 +239,19 @@ public class PlugBoardHandler implements ActionListener{
 	
 	Color colourPicker(int index){
 		switch(index){
-			case 0: return Color.BLUE; 
-			case 1: return Color.RED;
-			case 2: return Color.CYAN; 
-			case 3: return Color.GREEN;
-			case 4: return Color.MAGENTA; 
-			case 5: return Color.ORANGE; 
-			case 6: return Color.PINK; 
-			case 7: return Color.YELLOW; 
-			case 8: return aqua; 
-			case 9: return purple; 
-			case 10: return skyBlue; 
-			case 11: return darkGreen;
-			case 12: return navy; 
+			case 1: return Color.BLUE; 
+			case 2: return Color.RED;
+			case 3: return Color.CYAN; 
+			case 4: return Color.GREEN;
+			case 5: return Color.MAGENTA; 
+			case 6: return Color.ORANGE; 
+			case 7: return Color.PINK; 
+			case 8: return Color.YELLOW; 
+			case 9: return aqua; 
+			case 10: return purple; 
+			case 11: return skyBlue; 
+			case 12: return darkGreen;
+			case 13: return navy; 
 			default: return Color.BLACK;
 		}
 	}
