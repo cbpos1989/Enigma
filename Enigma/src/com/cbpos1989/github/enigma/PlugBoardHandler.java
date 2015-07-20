@@ -22,7 +22,6 @@ public class PlugBoardHandler implements ActionListener{
 	private char[][] plugPairs = new char[13][2];
 	private int i = 0;
 	private int indexRow = 0;
-	private int indexColumn = 0;
 	private JToggleButton[] tBtn = new JToggleButton[2];
 	private JToggleButton[][] toggleButtons = new JToggleButton[13][2];
 	
@@ -177,7 +176,7 @@ public class PlugBoardHandler implements ActionListener{
 	void checkButtonArrayOverwrite(){
 		outer:
 		for(int i = 0; i < toggleButtons.length; ++i){
-			for(int j = 0; j < 2; ++j){
+			for(int j = 0; j < 2;){
 				if(toggleButtons[i][j] !=  null){
 					this.indexRow++;
 					System.out.println("indexRow has been incremneted " + this.indexRow);
@@ -206,7 +205,7 @@ public class PlugBoardHandler implements ActionListener{
 	void checkCharArrayOverwrite(){
 		outer:
 		for(int i = 0; i < plugPairs.length; ++i){
-			for(int j = 0; j < 2; ++j){
+			for(int j = 0; j < 2;){
 				if(plugPairs[i][j] !=  '\u0000'){
 					this.i++;
 					System.out.println("i has been incremneted " + this.i);

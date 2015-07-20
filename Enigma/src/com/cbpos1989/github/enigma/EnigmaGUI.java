@@ -51,7 +51,7 @@ public class EnigmaGUI extends JFrame {
 	private char[] thirdRow = {'P','Y','X','C','V','B','N','M','L'};
 	private JLabel[] lights = new JLabel[26];
 	private int counter = 0;
-	private PlugBoardHandler pbh;
+	//private PlugBoardHandler pbh;
 	private PlugBoardMenu pbm;
 	private JTextField leftRtrTextField;
 	private JTextField middleRtrTextField;
@@ -64,7 +64,7 @@ public class EnigmaGUI extends JFrame {
 	public EnigmaGUI(PlugBoardHandler pbh, PlugBoardMenu pbm) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(BACKGROUND_COLOUR);
-		this.pbh = pbh;
+		//this.pbh = pbh;
 		this.pbm = pbm;
 		eh = new EnigmaHandler(this, pbh);
 		initialiseGui();
