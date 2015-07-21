@@ -40,6 +40,9 @@ public class PlugBoardHandler implements ActionListener{
 		this.pbm = pbm;
 	}
 
+	public char[] getSelectedButtons() {
+		return selectedButtons;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {

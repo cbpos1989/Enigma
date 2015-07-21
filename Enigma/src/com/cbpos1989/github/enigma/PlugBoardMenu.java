@@ -9,6 +9,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JToggleButton;
@@ -43,7 +44,7 @@ public class PlugBoardMenu extends JFrame {
 	public PlugBoardMenu() {
 		this.pbh = new PlugBoardHandler(this);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 700, 300);
 		GridLayout mainLayout = new GridLayout(1,1,10,10);
 		getContentPane().setLayout(mainLayout);
@@ -70,10 +71,19 @@ public class PlugBoardMenu extends JFrame {
 		JButton linkButton = new JButton("Link Letters");
 		linkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				pbh.addLetterToArray();
-				pbh.addButtonToArray();
-				pbh.printArray();
+				char[] selectedButtons = pbh.getSelectedButtons();
 				
+				if(selectedButtons[0] != 0 && selectedButtons[1] != 0){
+					pbh.addLetterToArray();
+					pbh.addButtonToArray();
+					pbh.printArray();
+				} else {
+					Component plugBoardMessage = null;
+					JOptionPane.showMessageDialog(plugBoardMessage,
+						    "Select plugs before trying to link them",
+						    "PlugBoard Warning",
+						    JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		linkButton.setMargin(new Insets(2, 2, 2, 2));
