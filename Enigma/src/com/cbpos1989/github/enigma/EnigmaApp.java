@@ -35,7 +35,7 @@ public class EnigmaApp {
 		pbh = new PlugBoardHandler(pbm);
 		final EnigmaGUI eGui = new EnigmaGUI(pbh,pbm);
 		
-		eGui.setBounds((screenWidth/2)-275, (screenHeight/2)-300, 550, 575);
+		eGui.setBounds((screenWidth/2)-275, (screenHeight/2)-300, 550, 600);
 		eGui.setVisible(true);
 		
 		
