@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ import java.awt.event.ActionEvent;
  * @dependencies None
  */
 
-public class PlugBoardMenu extends JFrame {
+public class PlugBoardMenu extends JDialog {
 
 	/**
 	 * 
@@ -43,7 +44,7 @@ public class PlugBoardMenu extends JFrame {
 	 */
 	public PlugBoardMenu() {
 		this.pbh = new PlugBoardHandler(this);
-		
+		//this.setModalityType(ModalityType.TOOLKIT_MODAL);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 700, 300);
 		GridLayout mainLayout = new GridLayout(1,1,10,10);

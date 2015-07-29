@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpinnerListModel;
 import java.awt.Color;
@@ -21,6 +22,8 @@ import javax.swing.JSpinner.DefaultEditor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
+import java.awt.Dialog.ModalityType;
+
 import javax.swing.Box;
 import javax.swing.JTextField;
 import java.awt.Dimension;
@@ -177,7 +180,9 @@ public class EnigmaGUI extends JFrame {
 		JButton btnPlugBoard = new JButton("Access PlugBoard");
 		btnPlugBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				pbm.setModalityType(ModalityType.APPLICATION_MODAL);
 				pbm.setVisible(true);
+				
 			}
 		});
 		btnPlugBoard.setMargin(new Insets(2, 2, 2, 2));
@@ -195,7 +200,15 @@ public class EnigmaGUI extends JFrame {
 				int middleRtr = convertSpinnerValue(middleRtrSpinner);
 				int leftRtr = convertSpinnerValue(leftRtrSpinner);
 				
-				eh.createRotors(rightRtr, middleRtr, leftRtr);
+				if(rightRtr == middleRtr || rightRtr == leftRtr || middleRtr == leftRtr){
+					Component rotorMessage = null;
+					JOptionPane.showMessageDialog(rotorMessage,
+						    "Rotors cannot be used twice, choose different numbered Rotors",
+						    "Rotor Warning",
+						    JOptionPane.WARNING_MESSAGE);
+				} else {
+					eh.createRotors(rightRtr, middleRtr, leftRtr);
+				}
 			}
 		});
 		
@@ -289,6 +302,7 @@ public class EnigmaGUI extends JFrame {
 		      }
 		      // reset the value to some known value:
 		      spinner.setValue(spinner.getPreviousValue());
+		      spinner.setValue(spinner);
 		      // or treat the last valid value as the current, in which
 		      // case you don't need to do anything.
 		}

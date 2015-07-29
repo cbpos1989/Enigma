@@ -24,7 +24,7 @@ public class EnigmaApp {
 	private PlugBoardMenu pbm;
 	
 	public static void main(String[] args){
-		System.out.println("Working");
+		System.out.println("<<<Starting Program>>>");
 		EnigmaApp eApp = new EnigmaApp();
 		eApp.initialiseMenu();
 	}
@@ -46,9 +46,15 @@ public class EnigmaApp {
 		            "Are you sure you want to quit app?", "Quiting Enigma App", 
 		            JOptionPane.YES_NO_OPTION,
 		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-		        	System.exit(0);
+		        	endProgram();
 		        }
 		    }
 		});
 	}
+	
+	void endProgram(){
+		System.out.println("!!!Exiting Program!!!");
+		return;
+	}
+	
 }
