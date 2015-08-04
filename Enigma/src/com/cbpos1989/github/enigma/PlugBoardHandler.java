@@ -31,8 +31,9 @@ public class PlugBoardHandler implements ActionListener{
 	private Color skyBlue = new Color(204,229,255);
 	private Color purple = new Color(127,0,225);
 	private Color darkGreen = new Color(0,102,51);
-	private Color navy = new Color(0,0,153);
-
+	private Color turquoise = new Color(12,170,179);
+	private Color seaFoam = new Color(167,217,188);
+	private Color beige = new Color(217,213,167);
 	
 	public int buttonCounter = 0;
 	
@@ -244,16 +245,16 @@ public class PlugBoardHandler implements ActionListener{
 			case 1: return Color.BLUE; 
 			case 2: return Color.RED;
 			case 3: return Color.CYAN; 
-			case 4: return Color.GREEN;
+			case 4: return beige;
 			case 5: return Color.MAGENTA; 
 			case 6: return Color.ORANGE; 
 			case 7: return Color.PINK; 
 			case 8: return Color.YELLOW; 
 			case 9: return aqua; 
 			case 10: return purple; 
-			case 11: return skyBlue; 
+			case 11: return seaFoam; 
 			case 12: return darkGreen;
-			case 13: return navy; 
+			case 13: return turquoise; 
 			default: return Color.BLACK;
 		}
 	}
