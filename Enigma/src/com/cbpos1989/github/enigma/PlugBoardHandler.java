@@ -28,7 +28,6 @@ public class PlugBoardHandler implements ActionListener{
 	
 	
 	private Color aqua = new Color(122,250,208);
-	private Color skyBlue = new Color(204,229,255);
 	private Color purple = new Color(127,0,225);
 	private Color darkGreen = new Color(0,102,51);
 	private Color turquoise = new Color(12,170,179);

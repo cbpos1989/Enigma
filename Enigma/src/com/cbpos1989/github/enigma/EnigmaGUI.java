@@ -132,7 +132,7 @@ public class EnigmaGUI extends JFrame {
 		topPanel.add(optionsPanel);
 		
 		//Rotor Spinners
-		final JSpinner leftRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		final JSpinner leftRtrSpinner = new JSpinner( new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
 		leftRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(leftRtrSpinner);
 		
@@ -144,7 +144,7 @@ public class EnigmaGUI extends JFrame {
 		leftRtrTextField.setColumns(10);
 		leftRtrTextField.setText("A");
 		
-		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		final JSpinner middleRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"II", "III", "IV", "V", "I"}));
 		middleRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(middleRtrSpinner);
 		
@@ -156,7 +156,7 @@ public class EnigmaGUI extends JFrame {
 		middleRtrTextField.setColumns(10);
 		middleRtrTextField.setText("A");
 		
-		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"I", "II", "III", "IV", "V"}));
+		final JSpinner rightRtrSpinner = new JSpinner(new SpinnerListModel(new String[] {"III", "IV", "V", "I", "II"}));
 		rightRtrSpinner.setFont(new Font("Cooper Black", Font.BOLD, 16));
 		optionsPanel.add(rightRtrSpinner);
 		
